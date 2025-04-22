@@ -13,8 +13,6 @@ namespace AppFlashCard
 {
     public partial class FrmEstudiar : Form
     {
-        private List<Materia> materias = new List<Materia>();
-
         public FrmEstudiar()
         {
             InitializeComponent();
@@ -29,7 +27,7 @@ namespace AppFlashCard
 
             // Agregar botón "Ver temas"
             DataGridViewButtonColumn colBoton = new DataGridViewButtonColumn();
-            colBoton.Name = "btnTemas"; // ← aquí está la clave
+            colBoton.Name = "btnTemas";
             colBoton.HeaderText = "Temas";
             colBoton.Text = "📂 Ver temas";
             colBoton.UseColumnTextForButtonValue = true;
@@ -49,6 +47,12 @@ namespace AppFlashCard
                     dgvTemas.DataSource = materiaSeleccionada.Temas.Select(t => new { Tema = t.Nombre }).ToList();
                 }
             }
+        }
+
+        private void dgvTemas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FrmFlashcardEstudio flashcardEstudio = new FrmFlashcardEstudio();
+            flashcardEstudio.Show();
         }
     }
 }

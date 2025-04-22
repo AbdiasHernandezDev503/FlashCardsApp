@@ -72,16 +72,17 @@
             // 
             // btnIniciarSesion
             // 
-            btnIniciarSesion.Location = new Point(95, 293);
+            btnIniciarSesion.Location = new Point(350, 293);
             btnIniciarSesion.Name = "btnIniciarSesion";
-            btnIniciarSesion.Size = new Size(152, 35);
+            btnIniciarSesion.Size = new Size(177, 35);
             btnIniciarSesion.TabIndex = 5;
             btnIniciarSesion.Text = "Iniciar Sesión";
             btnIniciarSesion.UseVisualStyleBackColor = true;
+            btnIniciarSesion.Click += btnIniciarSesion_Click;
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(298, 293);
+            btnRegistrar.Location = new Point(115, 293);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(185, 35);
             btnRegistrar.TabIndex = 6;
@@ -91,7 +92,7 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(533, 293);
+            btnSalir.Location = new Point(600, 293);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(165, 35);
             btnSalir.TabIndex = 7;

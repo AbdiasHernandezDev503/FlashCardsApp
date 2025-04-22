@@ -56,6 +56,7 @@
             dgvTemas.Size = new Size(561, 130);
             dgvTemas.TabIndex = 1;
             dgvTemas.Visible = false;
+            dgvTemas.CellClick += dgvTemas_CellClick;
             // 
             // FrmEstudiar
             // 
