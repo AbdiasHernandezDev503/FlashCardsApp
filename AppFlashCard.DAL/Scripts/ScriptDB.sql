@@ -9,11 +9,11 @@ CREATE TABLE Usuarios (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Nombres NVARCHAR(100) NOT NULL,
     Apellidos NVARCHAR(100) NOT NULL,
+	FechaNacimiento DATE NOT NULL,
     Username NVARCHAR(50) NOT NULL UNIQUE,
     Clave NVARCHAR(100) NOT NULL,
     Correo NVARCHAR(100) NOT NULL,
     Telefono NVARCHAR(20) NOT NULL,
-    Direccion NVARCHAR(200) NOT NULL,
     CarnetEstudiante NVARCHAR(20) NULL
 );
 GO

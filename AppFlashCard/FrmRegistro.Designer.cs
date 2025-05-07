@@ -33,20 +33,22 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            label5 = new Label();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            comboBox1 = new ComboBox();
-            dateTimePicker1 = new DateTimePicker();
-            button1 = new Button();
+            txtNombres = new TextBox();
+            txtApellidos = new TextBox();
+            txtCorreo = new TextBox();
+            txtUsername = new TextBox();
+            txtPassword = new TextBox();
+            txtConfirmPassword = new TextBox();
+            dtpFechaNacimiento = new DateTimePicker();
+            btnResgistrar = new Button();
             btnSalir = new Button();
+            label5 = new Label();
+            txtTelefono = new TextBox();
+            label9 = new Label();
+            txtCarnet = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -70,7 +72,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(590, 128);
+            label3.Location = new Point(46, 117);
             label3.Name = "label3";
             label3.Size = new Size(149, 20);
             label3.TabIndex = 2;
@@ -84,15 +86,6 @@
             label4.Size = new Size(49, 20);
             label4.TabIndex = 3;
             label4.Text = "Email:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(46, 128);
-            label5.Name = "label5";
-            label5.Size = new Size(57, 20);
-            label5.TabIndex = 4;
-            label5.Text = "Género";
             // 
             // label6
             // 
@@ -121,80 +114,71 @@
             label8.TabIndex = 7;
             label8.Text = "Confirmar contraseña";
             // 
-            // textBox1
+            // txtNombres
             // 
-            textBox1.Location = new Point(153, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(321, 27);
-            textBox1.TabIndex = 8;
+            txtNombres.Location = new Point(218, 49);
+            txtNombres.Name = "txtNombres";
+            txtNombres.Size = new Size(295, 27);
+            txtNombres.TabIndex = 8;
             // 
-            // textBox2
+            // txtApellidos
             // 
-            textBox2.Location = new Point(794, 52);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(295, 27);
-            textBox2.TabIndex = 9;
+            txtApellidos.Location = new Point(738, 52);
+            txtApellidos.Name = "txtApellidos";
+            txtApellidos.Size = new Size(351, 27);
+            txtApellidos.TabIndex = 9;
             // 
-            // textBox3
+            // txtCorreo
             // 
-            textBox3.Location = new Point(153, 202);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(321, 27);
-            textBox3.TabIndex = 10;
+            txtCorreo.Location = new Point(153, 202);
+            txtCorreo.Name = "txtCorreo";
+            txtCorreo.Size = new Size(321, 27);
+            txtCorreo.TabIndex = 10;
             // 
-            // textBox4
+            // txtUsername
             // 
-            textBox4.Location = new Point(794, 202);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(295, 27);
-            textBox4.TabIndex = 11;
+            txtUsername.Location = new Point(794, 202);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(295, 27);
+            txtUsername.TabIndex = 11;
             // 
-            // textBox5
+            // txtPassword
             // 
-            textBox5.Location = new Point(153, 277);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(321, 27);
-            textBox5.TabIndex = 12;
-            textBox5.UseSystemPasswordChar = true;
+            txtPassword.Location = new Point(153, 277);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(321, 27);
+            txtPassword.TabIndex = 12;
+            txtPassword.UseSystemPasswordChar = true;
             // 
-            // textBox6
+            // txtConfirmPassword
             // 
-            textBox6.Location = new Point(794, 277);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(295, 27);
-            textBox6.TabIndex = 13;
-            textBox6.UseSystemPasswordChar = true;
+            txtConfirmPassword.Location = new Point(794, 277);
+            txtConfirmPassword.Name = "txtConfirmPassword";
+            txtConfirmPassword.Size = new Size(295, 27);
+            txtConfirmPassword.TabIndex = 13;
+            txtConfirmPassword.UseSystemPasswordChar = true;
             // 
-            // comboBox1
+            // dtpFechaNacimiento
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "SELECCIONAR", "FEMENINO", "MASCULINO" });
-            comboBox1.Location = new Point(153, 125);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(321, 28);
-            comboBox1.TabIndex = 14;
+            dtpFechaNacimiento.Location = new Point(218, 117);
+            dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            dtpFechaNacimiento.Size = new Size(295, 27);
+            dtpFechaNacimiento.TabIndex = 15;
+            dtpFechaNacimiento.Value = new DateTime(2025, 4, 20, 0, 0, 0, 0);
             // 
-            // dateTimePicker1
+            // btnResgistrar
             // 
-            dateTimePicker1.Location = new Point(794, 128);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(295, 27);
-            dateTimePicker1.TabIndex = 15;
-            dateTimePicker1.Value = new DateTime(2025, 4, 20, 0, 0, 0, 0);
-            // 
-            // button1
-            // 
-            button1.Location = new Point(377, 371);
-            button1.Name = "button1";
-            button1.Size = new Size(201, 41);
-            button1.TabIndex = 16;
-            button1.Text = "Registrarse";
-            button1.UseVisualStyleBackColor = true;
-            button1.MouseClick += button1_MouseClick;
+            btnResgistrar.Location = new Point(366, 447);
+            btnResgistrar.Name = "btnResgistrar";
+            btnResgistrar.Size = new Size(201, 41);
+            btnResgistrar.TabIndex = 16;
+            btnResgistrar.Text = "Registrarse";
+            btnResgistrar.UseVisualStyleBackColor = true;
+            btnResgistrar.Click += btnResgistrar_Click;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(670, 371);
+            btnSalir.Location = new Point(653, 447);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(199, 41);
             btnSalir.TabIndex = 17;
@@ -202,25 +186,59 @@
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.MouseClick += btnSalir_MouseClick;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(590, 117);
+            label5.Name = "label5";
+            label5.Size = new Size(67, 20);
+            label5.TabIndex = 18;
+            label5.Text = "Telefono";
+            // 
+            // txtTelefono
+            // 
+            txtTelefono.Location = new Point(738, 114);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(351, 27);
+            txtTelefono.TabIndex = 19;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(46, 359);
+            label9.Name = "label9";
+            label9.Size = new Size(218, 20);
+            label9.TabIndex = 20;
+            label9.Text = "Carnet de estudiante (opcional)";
+            // 
+            // txtCarnet
+            // 
+            txtCarnet.Location = new Point(270, 356);
+            txtCarnet.Name = "txtCarnet";
+            txtCarnet.Size = new Size(204, 27);
+            txtCarnet.TabIndex = 21;
+            // 
             // FrmRegistro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1203, 520);
+            ClientSize = new Size(1203, 535);
+            Controls.Add(txtCarnet);
+            Controls.Add(label9);
+            Controls.Add(txtTelefono);
+            Controls.Add(label5);
             Controls.Add(btnSalir);
-            Controls.Add(button1);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(btnResgistrar);
+            Controls.Add(dtpFechaNacimiento);
+            Controls.Add(txtConfirmPassword);
+            Controls.Add(txtPassword);
+            Controls.Add(txtUsername);
+            Controls.Add(txtCorreo);
+            Controls.Add(txtApellidos);
+            Controls.Add(txtNombres);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -238,19 +256,21 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private Label label5;
         private Label label6;
         private Label label7;
         private Label label8;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
-        private ComboBox comboBox1;
-        private DateTimePicker dateTimePicker1;
-        private Button button1;
+        private TextBox txtNombres;
+        private TextBox txtApellidos;
+        private TextBox txtCorreo;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
+        private TextBox txtConfirmPassword;
+        private DateTimePicker dtpFechaNacimiento;
+        private Button btnResgistrar;
         private Button btnSalir;
+        private Label label5;
+        private TextBox txtTelefono;
+        private Label label9;
+        private TextBox txtCarnet;
     }
 }
