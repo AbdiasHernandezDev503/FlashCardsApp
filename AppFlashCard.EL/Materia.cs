@@ -8,7 +8,7 @@ namespace AppFlashCard.EL
 {
     public class Materia
     {
+        public int Id { get; set; }
         public string Nombre { get; set; }
-        public List<Tema> Temas { get; set; } = new List<Tema>();
     }
 }

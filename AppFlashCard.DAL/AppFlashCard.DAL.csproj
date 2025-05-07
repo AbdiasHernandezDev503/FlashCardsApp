@@ -14,4 +14,8 @@
     <ProjectReference Include="..\AppFlashCard.EL\AppFlashCard.EL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+
 </Project>

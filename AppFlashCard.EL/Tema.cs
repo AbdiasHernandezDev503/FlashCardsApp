@@ -8,7 +8,8 @@ namespace AppFlashCard.EL
 {
     public class Tema
     {
-        public string Nombre { get; set; }  
-        public List<Flashcard> Flashcards { get; set; } = new List<Flashcard>();
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public int MateriaID { get; set; }
     }
 }
