@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             lblUsuario = new Label();
-            textBox1 = new TextBox();
+            txtUsername = new TextBox();
             lblPasword = new Label();
-            textBox2 = new TextBox();
+            txtPassword = new TextBox();
             btnIniciarSesion = new Button();
             btnRegistrar = new Button();
             btnSalir = new Button();
@@ -46,12 +46,12 @@
             lblUsuario.TabIndex = 0;
             lblUsuario.Text = "Usuario:";
             // 
-            // textBox1
+            // txtUsername
             // 
-            textBox1.Location = new Point(298, 120);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(300, 27);
-            textBox1.TabIndex = 1;
+            txtUsername.Location = new Point(298, 120);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(300, 27);
+            txtUsername.TabIndex = 1;
             // 
             // lblPasword
             // 
@@ -62,13 +62,13 @@
             lblPasword.TabIndex = 3;
             lblPasword.Text = "Contraseña";
             // 
-            // textBox2
+            // txtPassword
             // 
-            textBox2.Location = new Point(298, 188);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(300, 27);
-            textBox2.TabIndex = 4;
-            textBox2.UseSystemPasswordChar = true;
+            txtPassword.Location = new Point(298, 188);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(300, 27);
+            txtPassword.TabIndex = 4;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // btnIniciarSesion
             // 
@@ -108,9 +108,9 @@
             Controls.Add(btnSalir);
             Controls.Add(btnRegistrar);
             Controls.Add(btnIniciarSesion);
-            Controls.Add(textBox2);
+            Controls.Add(txtPassword);
             Controls.Add(lblPasword);
-            Controls.Add(textBox1);
+            Controls.Add(txtUsername);
             Controls.Add(lblUsuario);
             Name = "FrmLogin";
             Text = "Form1";
@@ -121,9 +121,9 @@
         #endregion
 
         private Label lblUsuario;
-        private TextBox textBox1;
+        private TextBox txtUsername;
         private Label lblPasword;
-        private TextBox textBox2;
+        private TextBox txtPassword;
         private Button btnIniciarSesion;
         private Button btnRegistrar;
         private Button btnSalir;

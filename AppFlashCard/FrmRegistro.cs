@@ -49,6 +49,8 @@ namespace AppFlashCard
             if (exito)
             {
                 MessageBox.Show("¡Usuario registrado exitosamente!");
+                FrmLogin login = new FrmLogin();
+                login.Show();
                 this.Close();
             }
             else

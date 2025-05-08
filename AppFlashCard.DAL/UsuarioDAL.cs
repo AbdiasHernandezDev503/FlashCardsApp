@@ -50,5 +50,43 @@ namespace AppFlashCard.DAL
                 }
             }
         }
+
+        public async Task<Usuario?> LoginUsuarioAsync(string username, string clave)
+        {
+            await using (var conexion = new SqlConnection(_connectionString))
+            {
+                await using (var cmd = new SqlCommand("SP_LoginUsuario", conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    try
+                    {
+                        await conexion.OpenAsync();
+                        var reader = await cmd.ExecuteReaderAsync();
+                        if (await reader.ReadAsync())
+                        {
+                            string hashAlmacenado = reader["Clave"].ToString();
+
+                            if (BCrypt.Net.BCrypt.Verify(clave, hashAlmacenado))
+                            {
+                                return new Usuario
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Username = reader["Username"].ToString()
+                                };
+                            }
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine("Error SQL: " + ex.Message);
+                    }
+                }
+            }
+            return null;
+        }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppFlashCard.EL;
+using AppFlashCard.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,48 @@ namespace AppFlashCard
         public MenuPrincipal()
         {
             InitializeComponent();
+
         }
+
+        private void MenuPrincipal_Load(object sender, EventArgs e)
+        {
+
+            if (SesionActiva.Usuario == null)
+            {
+                MessageBox.Show("Sesión no válida. Por favor inicia sesión.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                this.Hide();
+                FrmLogin login = new FrmLogin();
+                login.Show();
+
+                this.Close(); // Cierra el acceso no autorizado
+                return;
+            }
+
+            // Mostrar datos del usuario si la sesión es válida
+            lblBienvenida.Text = $"Bienvenido, {SesionActiva.Usuario.Nombres} {SesionActiva.Usuario.Apellidos}";
+        }
+
+        private void btnEstudiar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmEstudiar estudiar = new FrmEstudiar();
+            estudiar.Show();
+
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            // Cerrar sesión
+            SesionActiva.Usuario = null;
+
+            // Voolver al formulario de inicio de sesión
+            FrmLogin login = new FrmLogin();
+            login.Show();
+
+            this.Close();
+        }
+
+
     }
 }

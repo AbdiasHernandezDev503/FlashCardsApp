@@ -28,54 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvMaterias = new DataGridView();
-            dgvTemas = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dgvMaterias).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvTemas).BeginInit();
+            pbArbol = new PictureBox();
+            panelArbol = new Panel();
+            ((System.ComponentModel.ISupportInitialize)pbArbol).BeginInit();
+            panelArbol.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvMaterias
+            // pbArbol
             // 
-            dgvMaterias.AllowUserToDeleteRows = false;
-            dgvMaterias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMaterias.Location = new Point(76, 35);
-            dgvMaterias.Name = "dgvMaterias";
-            dgvMaterias.RowHeadersWidth = 51;
-            dgvMaterias.RowTemplate.Height = 29;
-            dgvMaterias.Size = new Size(561, 223);
-            dgvMaterias.TabIndex = 0;
-            dgvMaterias.CellClick += dgvMaterias_CellClick;
+            pbArbol.Location = new Point(3, 10);
+            pbArbol.Name = "pbArbol";
+            pbArbol.Size = new Size(1011, 371);
+            pbArbol.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbArbol.TabIndex = 0;
+            pbArbol.TabStop = false;
             // 
-            // dgvTemas
+            // panelArbol
             // 
-            dgvTemas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTemas.Location = new Point(76, 264);
-            dgvTemas.Name = "dgvTemas";
-            dgvTemas.RowHeadersWidth = 51;
-            dgvTemas.RowTemplate.Height = 29;
-            dgvTemas.Size = new Size(561, 130);
-            dgvTemas.TabIndex = 1;
-            dgvTemas.Visible = false;
-            dgvTemas.CellClick += dgvTemas_CellClick;
+            panelArbol.Controls.Add(pbArbol);
+            panelArbol.Location = new Point(0, 2);
+            panelArbol.Name = "panelArbol";
+            panelArbol.Size = new Size(1023, 455);
+            panelArbol.TabIndex = 1;
             // 
             // FrmEstudiar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(892, 450);
-            Controls.Add(dgvTemas);
-            Controls.Add(dgvMaterias);
+            ClientSize = new Size(1035, 570);
+            Controls.Add(panelArbol);
             Name = "FrmEstudiar";
             Text = "FrmEstudiar";
             Load += FrmEstudiar_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvMaterias).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvTemas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbArbol).EndInit();
+            panelArbol.ResumeLayout(false);
+            panelArbol.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dgvMaterias;
-        private DataGridView dgvTemas;
+        private PictureBox pbArbol;
+        private Panel panelArbol;
     }
 }

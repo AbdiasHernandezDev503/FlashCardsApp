@@ -29,8 +29,8 @@ GO
 CREATE TABLE Temas (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Nombre NVARCHAR(100) NOT NULL,
-    MateriaID INT NOT NULL,
-    FOREIGN KEY (MateriaID) REFERENCES Materias(Id)
+    MateriaId INT NOT NULL,
+    FOREIGN KEY (MateriaId) REFERENCES Materias(Id)
 );
 GO
 
@@ -38,11 +38,11 @@ GO
 CREATE TABLE Flashcards (
     Id INT PRIMARY KEY IDENTITY(1,1),
     UsuarioId INT NOT NULL,
-    TemaID INT NOT NULL,
+    TemaId INT NOT NULL,
     Pregunta NVARCHAR(255) NOT NULL,
     Respuesta NVARCHAR(255) NOT NULL,
     FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id),
-    FOREIGN KEY (TemaID) REFERENCES Temas(Id)
+    FOREIGN KEY (TemaId) REFERENCES Temas(Id)
 );
 GO

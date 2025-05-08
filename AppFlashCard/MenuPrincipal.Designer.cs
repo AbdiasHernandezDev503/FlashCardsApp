@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            btnEstudiar = new Button();
             button2 = new Button();
             button3 = new Button();
-            button4 = new Button();
+            btnCerrarSesion = new Button();
+            lblBienvenida = new Label();
             SuspendLayout();
             // 
-            // button1
+            // btnEstudiar
             // 
-            button1.Location = new Point(72, 118);
-            button1.Name = "button1";
-            button1.Size = new Size(169, 44);
-            button1.TabIndex = 0;
-            button1.Text = "Estudiar flashcards";
-            button1.UseVisualStyleBackColor = true;
+            btnEstudiar.Location = new Point(72, 118);
+            btnEstudiar.Name = "btnEstudiar";
+            btnEstudiar.Size = new Size(169, 44);
+            btnEstudiar.TabIndex = 0;
+            btnEstudiar.Text = "Estudiar flashcards";
+            btnEstudiar.UseVisualStyleBackColor = true;
+            btnEstudiar.Click += btnEstudiar_Click;
             // 
             // button2
             // 
@@ -61,34 +63,47 @@
             button3.Text = "Mi Usuario";
             button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnCerrarSesion
             // 
-            button4.Location = new Point(321, 215);
-            button4.Name = "button4";
-            button4.Size = new Size(159, 44);
-            button4.TabIndex = 3;
-            button4.Text = "Cerrar Sesión";
-            button4.UseVisualStyleBackColor = true;
+            btnCerrarSesion.Location = new Point(321, 215);
+            btnCerrarSesion.Name = "btnCerrarSesion";
+            btnCerrarSesion.Size = new Size(159, 44);
+            btnCerrarSesion.TabIndex = 3;
+            btnCerrarSesion.Text = "Cerrar Sesión";
+            btnCerrarSesion.UseVisualStyleBackColor = true;
+            btnCerrarSesion.Click += btnCerrarSesion_Click;
+            // 
+            // lblBienvenida
+            // 
+            lblBienvenida.AutoSize = true;
+            lblBienvenida.Location = new Point(173, 29);
+            lblBienvenida.Name = "lblBienvenida";
+            lblBienvenida.Size = new Size(0, 20);
+            lblBienvenida.TabIndex = 4;
             // 
             // MenuPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(708, 450);
-            Controls.Add(button4);
+            Controls.Add(lblBienvenida);
+            Controls.Add(btnCerrarSesion);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnEstudiar);
             Name = "MenuPrincipal";
             Text = "MenuPrincipal";
+            Load += MenuPrincipal_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
+        private Button btnEstudiar;
         private Button button2;
         private Button button3;
-        private Button button4;
+        private Button btnCerrarSesion;
+        private Label lblBienvenida;
     }
 }
