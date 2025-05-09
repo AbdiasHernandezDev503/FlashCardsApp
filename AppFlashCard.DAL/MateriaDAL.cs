@@ -18,6 +18,30 @@ namespace AppFlashCard.DAL
             _connectionString = connectionString;
         }
 
+        public async Task<List<Materia>> ObtenerMateriasAsync()
+        {
+            var listaMaterias = new List<Materia>();
+            await using (var conexion = new SqlConnection(_connectionString))
+            {
+                await using (var cmd = new SqlCommand("SELECT Id, Nombre FROM Materias", conexion))
+                {
+                    await conexion.OpenAsync();
+                    await using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            listaMaterias.Add(new Materia
+                            {
+                                Id = reader.GetInt32(0),
+                                Nombre = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+            return listaMaterias;
+        }
+
         public async Task<List<Materia>> ObtenerMateriasConTemasAsync()
         {
             var listaMaterias = new List<Materia>();

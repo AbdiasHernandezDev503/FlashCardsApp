@@ -40,3 +40,56 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [dbo].[SP_LoginUsuario] (
+	@Username NVARCHAR(50)
+) AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Id, Username, Clave
+    FROM Usuarios
+    WHERE Username = @Username;
+END
+GO
+
+CREATE PROCEDURE [dbo].[SP_InsertarFlashcard]
+    @UsuarioId INT,
+    @TemaId INT,
+    @Pregunta NVARCHAR(MAX),
+    @Respuesta NVARCHAR(MAX)
+AS
+BEGIN
+    -- Validar límite de creacion de flashcards a 20 por tema y usuario
+    IF (SELECT COUNT(*) FROM Flashcards WHERE UsuarioId = @UsuarioId AND TemaID = @TemaId) >= 20
+    BEGIN
+        RAISERROR('Has alcanzado el límite de 20 flashcards para este tema.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Flashcards (UsuarioId, TemaId, Pregunta, Respuesta, FechaCreacion)
+    VALUES (@UsuarioId, @TemaId, @Pregunta, @Respuesta, GETDATE());
+END
+GO
+CREATE FUNCTION [dbo].[FN_ContarFlashcardsPorTemaUsuario]
+(
+    @UsuarioId INT,
+    @TemaId INT
+)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Cantidad INT;
+
+    SELECT @Cantidad = COUNT(*)
+    FROM Flashcards
+    WHERE UsuarioId = @UsuarioId AND TemaId = @TemaId;
+
+    RETURN @Cantidad;
+END
+GO
+SELECT * FROM Flashcards;
+SELECT * FROM Temas;
+SELECT * FROM Usuarios;
+-- Reiniciar los ids cuando sea necesario
+DBCC CHECKIDENT ('Usuarios', RESEED, 0); 
+

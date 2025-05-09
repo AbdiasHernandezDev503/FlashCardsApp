@@ -59,6 +59,12 @@ namespace AppFlashCard
             this.Close();
         }
 
+        private void btnCrearFlashcards_Click(object sender, EventArgs e)
+        {
+            this.Hide();
 
+            FrmCrearFlashcard frmCrearFlashcard = new FrmCrearFlashcard();
+            frmCrearFlashcard.Show();
+        }
     }
 }

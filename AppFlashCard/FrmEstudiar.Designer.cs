@@ -36,20 +36,20 @@
             // 
             // pbArbol
             // 
-            pbArbol.Location = new Point(3, 10);
+            pbArbol.Location = new Point(32, 3);
             pbArbol.Name = "pbArbol";
-            pbArbol.Size = new Size(1011, 371);
-            pbArbol.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbArbol.Size = new Size(982, 371);
             pbArbol.TabIndex = 0;
             pbArbol.TabStop = false;
             // 
             // panelArbol
             // 
+            panelArbol.BorderStyle = BorderStyle.FixedSingle;
             panelArbol.Controls.Add(pbArbol);
             panelArbol.Location = new Point(0, 2);
             panelArbol.Name = "panelArbol";
-            panelArbol.Size = new Size(1023, 455);
-            panelArbol.TabIndex = 1;
+            panelArbol.Size = new Size(1023, 390);
+            panelArbol.TabIndex = 0;
             // 
             // FrmEstudiar
             // 
@@ -62,7 +62,6 @@
             Load += FrmEstudiar_Load;
             ((System.ComponentModel.ISupportInitialize)pbArbol).EndInit();
             panelArbol.ResumeLayout(false);
-            panelArbol.PerformLayout();
             ResumeLayout(false);
         }
 

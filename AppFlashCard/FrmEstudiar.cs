@@ -39,90 +39,87 @@ namespace AppFlashCard
 
 
             var listaMaterias = await new MateriaDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False").ObtenerMateriasConTemasAsync();
-            DibujarArbol(listaMaterias);
+            DibujarArbolJerarquico(listaMaterias);
 
         }
 
-        private void DibujarArbol(List<Materia> materias)
+        private void DibujarArbolJerarquico(List<Materia> materias)
         {
-            int startX = 50;
-            int startY = 50;
-            int nodoAncho = 120;
+            int nodoAncho = 100;
             int nodoAlto = 40;
-            int espacioHorizontal = 50;
+            int espacioHorizontal = 80;
             int espacioVertical = 80;
+            int margen = 50;
 
             int totalMaterias = materias.Count;
-            int nodoEspaciadoX = nodoAncho + espacioHorizontal;
+            int anchoTotal = (totalMaterias * (nodoAncho + espacioHorizontal)) + margen * 2;
+            int altoTotal = 300 + materias.Max(m => m.Temas.Count) * (nodoAlto + espacioVertical);
 
-            int totalAncho = (totalMaterias * nodoEspaciadoX) + startX;
-            int totalAlto = 300 + (materias.Max(m => m.Temas.Count) * (nodoAlto + espacioVertical));
-
-            Bitmap bmp = new Bitmap(totalAncho, totalAlto);
+            Bitmap bmp = new Bitmap(anchoTotal, altoTotal);
             using Graphics g = Graphics.FromImage(bmp);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.Clear(Color.White);
 
-            Font font = new Font("Arial", 10, FontStyle.Regular);
-            StringFormat formatoCentro = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-
+            Font font = new Font("Arial", 10);
             Pen pen = new Pen(Color.Black, 1.5f);
             Brush brushRaiz = Brushes.SkyBlue;
-            Brush brushMateria = Brushes.MediumSeaGreen;
+            Brush brushMateria = Brushes.LightGreen;
             Brush brushTema = Brushes.LightYellow;
             Brush textBrush = Brushes.Black;
+            StringFormat sf = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 
-            // Nodo raíz centrado
-            int centroX = totalAncho / 2;
-            Rectangle nodoRaiz = new Rectangle(centroX - nodoAncho / 2, 20, nodoAncho, nodoAlto);
+            // Dibujo nodo raíz "Materias"
+            int centroX = anchoTotal / 2;
+            int raizX = centroX - nodoAncho / 2;
+            int raizY = 20;
+            Rectangle nodoRaiz = new Rectangle(raizX, raizY, nodoAncho, nodoAlto);
             g.FillEllipse(brushRaiz, nodoRaiz);
             g.DrawEllipse(pen, nodoRaiz);
-            g.DrawString("Materias", font, textBrush, nodoRaiz, formatoCentro);
+            g.DrawString("Materias", font, textBrush, nodoRaiz, sf);
 
-            // Posicionar materias
-            int materiaStartX = startX;
-            int nivelMateriaY = nodoRaiz.Bottom + espacioVertical;
+            // Materias nivel 1
+            int xActual = margen;
+            int nivelMateriaY = raizY + nodoAlto + espacioVertical;
 
             foreach (var materia in materias)
             {
-                Rectangle nodoMateria = new Rectangle(materiaStartX, nivelMateriaY, nodoAncho, nodoAlto);
-                g.FillEllipse(brushMateria, nodoMateria);
-                g.DrawEllipse(pen, nodoMateria);
-                g.DrawString(materia.Nombre, font, textBrush, nodoMateria, formatoCentro);
+                Rectangle rectMateria = new Rectangle(xActual, nivelMateriaY, nodoAncho, nodoAlto);
+                g.FillEllipse(brushMateria, rectMateria);
+                g.DrawEllipse(pen, rectMateria);
+                g.DrawString(materia.Nombre, font, textBrush, rectMateria, sf);
 
-                // Línea desde raíz
-                g.DrawLine(pen, nodoRaiz.X + nodoRaiz.Width / 2, nodoRaiz.Bottom,
-                                nodoMateria.X + nodoMateria.Width / 2, nodoMateria.Y);
+                // Línea desde raíz a materia
+                g.DrawLine(pen, nodoRaiz.X + nodoAncho / 2, nodoRaiz.Bottom,
+                                rectMateria.X + nodoAncho / 2, rectMateria.Y);
 
-                // Calcular temas centrados bajo la materia
-                int totalTemas = materia.Temas.Count;
-                int totalTemasWidth = totalTemas * nodoEspaciadoX;
-                int temaStartX = nodoMateria.X + nodoAncho / 2 - totalTemasWidth / 2;
-
-                int temaY = nodoMateria.Bottom + espacioVertical;
+                // Dibujar temas (nivel 2)
+                int temaY = rectMateria.Bottom + espacioVertical;
+                int temaXStart = rectMateria.X - ((materia.Temas.Count - 1) * (nodoAncho + espacioHorizontal)) / 2;
 
                 foreach (var tema in materia.Temas)
                 {
-                    Rectangle nodoTema = new Rectangle(temaStartX, temaY, nodoAncho, nodoAlto);
-                    g.FillEllipse(brushTema, nodoTema);
-                    g.DrawEllipse(pen, nodoTema);
-                    g.DrawString(tema.Nombre, font, textBrush, nodoTema, formatoCentro);
+                    Rectangle rectTema = new Rectangle(temaXStart, temaY, nodoAncho, nodoAlto);
+                    g.FillEllipse(brushTema, rectTema);
+                    g.DrawEllipse(pen, rectTema);
+                    g.DrawString(tema.Nombre, font, textBrush, rectTema, sf);
 
                     // Línea desde materia a tema
-                    g.DrawLine(pen, nodoMateria.X + nodoMateria.Width / 2, nodoMateria.Bottom,
-                                    nodoTema.X + nodoTema.Width / 2, nodoTema.Y);
+                    g.DrawLine(pen, rectMateria.X + nodoAncho / 2, rectMateria.Bottom,
+                                    rectTema.X + nodoAncho / 2, rectTema.Y);
 
-                    temaStartX += nodoEspaciadoX;
+                    temaXStart += nodoAncho + espacioHorizontal;
                 }
 
-                materiaStartX += nodoEspaciadoX;
+                xActual += nodoAncho + espacioHorizontal;
             }
 
             pbArbol.Image = bmp;
             pbArbol.Width = bmp.Width;
             pbArbol.Height = bmp.Height;
-            pbArbol.Location = new Point(0, 0); 
-
+            pbArbol.Location = new Point(0, 0);
+            panelArbol.AutoScrollPosition = new Point(0, 0); 
         }
+
 
     }
 }

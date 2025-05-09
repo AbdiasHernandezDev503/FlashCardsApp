@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             btnEstudiar = new Button();
-            button2 = new Button();
+            btnCrearFlashcards = new Button();
             button3 = new Button();
             btnCerrarSesion = new Button();
             lblBienvenida = new Label();
@@ -45,14 +45,15 @@
             btnEstudiar.UseVisualStyleBackColor = true;
             btnEstudiar.Click += btnEstudiar_Click;
             // 
-            // button2
+            // btnCrearFlashcards
             // 
-            button2.Location = new Point(321, 118);
-            button2.Name = "button2";
-            button2.Size = new Size(159, 44);
-            button2.TabIndex = 1;
-            button2.Text = "Crear Flashcards";
-            button2.UseVisualStyleBackColor = true;
+            btnCrearFlashcards.Location = new Point(321, 118);
+            btnCrearFlashcards.Name = "btnCrearFlashcards";
+            btnCrearFlashcards.Size = new Size(159, 44);
+            btnCrearFlashcards.TabIndex = 1;
+            btnCrearFlashcards.Text = "Crear Flashcards";
+            btnCrearFlashcards.UseVisualStyleBackColor = true;
+            btnCrearFlashcards.Click += btnCrearFlashcards_Click;
             // 
             // button3
             // 
@@ -89,7 +90,7 @@
             Controls.Add(lblBienvenida);
             Controls.Add(btnCerrarSesion);
             Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btnCrearFlashcards);
             Controls.Add(btnEstudiar);
             Name = "MenuPrincipal";
             Text = "MenuPrincipal";
@@ -101,7 +102,7 @@
         #endregion
 
         private Button btnEstudiar;
-        private Button button2;
+        private Button btnCrearFlashcards;
         private Button button3;
         private Button btnCerrarSesion;
         private Label lblBienvenida;
