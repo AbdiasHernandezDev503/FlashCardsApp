@@ -1,14 +1,20 @@
 using AppFlashCard.DAL;
 using AppFlashCard.Utils;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace AppFlashCard
 {
     public partial class FrmLogin : Form
     {
+        private readonly string _connectionString;
+        private readonly UsuarioDAL _usuarioDAL;    
+
         public FrmLogin()
         {
             InitializeComponent();
+            _connectionString = ConfigurationManager.ConnectionStrings["FlashcardsDB"].ConnectionString;
+            _usuarioDAL = new UsuarioDAL(_connectionString);
         }
 
         private void btnRegistrar_MouseClick(object sender, MouseEventArgs e)
@@ -30,11 +36,9 @@ namespace AppFlashCard
             string username = txtUsername.Text.Trim();
             string clave = txtPassword.Text;
 
-            var dal = new UsuarioDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-
             try
             {
-                var usuario = await dal.LoginUsuarioAsync(username, clave);
+                var usuario = await _usuarioDAL.LoginUsuarioAsync(username, clave);
 
                 if (usuario != null)
                 {

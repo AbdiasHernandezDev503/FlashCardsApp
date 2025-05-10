@@ -1,6 +1,7 @@
 ﻿using AppFlashCard.DAL;
 using AppFlashCard.EL;
 using AppFlashCard.Utils;
+using System.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,18 @@ namespace AppFlashCard
 {
     public partial class FrmCrearFlashcard : Form
     {
+        private readonly string _connectionString;
+        private readonly FlashcardDAL _flashcardDAL;
+        private readonly MateriaDAL _materiaDAL;
+        private readonly TemaDAL _temaDAL;
+
         public FrmCrearFlashcard()
         {
             InitializeComponent();
+            _connectionString = ConfigurationManager.ConnectionStrings["FlashcardsDB"].ConnectionString;
+            _flashcardDAL = new FlashcardDAL(_connectionString);
+            _materiaDAL = new MateriaDAL(_connectionString);
+            _temaDAL = new TemaDAL(_connectionString);
             lblContador.Text = "0/20 Flashcards para este tema"; // Inicializa el contador de flashcards
         }
 
@@ -40,8 +50,7 @@ namespace AppFlashCard
 
         private async Task CargarMateriasAsync()
         {
-            var materiaDAL = new MateriaDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-            var materias = await materiaDAL.ObtenerMateriasAsync();
+            var materias = await _materiaDAL.ObtenerMateriasAsync();
 
             cbMaterias.DataSource = materias;
             cbMaterias.DisplayMember = "Nombre";
@@ -51,8 +60,7 @@ namespace AppFlashCard
 
         private async Task CargarTemasAsync(int materiaId)
         {
-            var temaDAL = new TemaDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-            var temas = await temaDAL.ObtenerTemasPorMateriaIdAsync(materiaId);
+            var temas = await _temaDAL.ObtenerTemasPorMateriaIdAsync(materiaId);
 
             cbTemas.DataSource = temas;
             cbTemas.DisplayMember = "Nombre";
@@ -83,13 +91,15 @@ namespace AppFlashCard
             };
 
 
-            var resultado = await new FlashcardDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False").CrearFlashcardAsync(flashcard);
+            var resultado = await _flashcardDAL.CrearFlashcardAsync(flashcard);
 
             if (resultado.Exito)
             {
                 MessageBox.Show("Flashcard creada correctamente.");
                 txtPregunta.Clear();
                 txtRespuesta.Clear();
+                cbMaterias.SelectedIndex = -1;
+                cbTemas.SelectedIndex = -1; 
             }
             else
             {
@@ -118,9 +128,8 @@ namespace AppFlashCard
             if (cbTemas.SelectedItem is Tema temaSeleccionado)
             {
                 int usuarioId = SesionActiva.Usuario.Id;
-                var flashcardDAL = new FlashcardDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
-                int cantidad = await flashcardDAL.ContarFlashcardAsync(usuarioId, temaSeleccionado.Id);
+                int cantidad = await _flashcardDAL.ContarFlashcardAsync(usuarioId, temaSeleccionado.Id);
 
                 lblContador.Text = $"{cantidad} / 20 flashcards usadas";
 

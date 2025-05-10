@@ -33,10 +33,8 @@ namespace AppFlashCard
 
                 this.Close(); // Cierra el acceso no autorizado
                 return;
-            }
-
-            // Mostrar datos del usuario si la sesión es válida
-            lblBienvenida.Text = $"Bienvenido, {SesionActiva.Usuario.Nombres} {SesionActiva.Usuario.Apellidos}";
+            } else 
+                lblBienvenida.Text = $"Bienvenido, {SesionActiva.Usuario.Nombres} {SesionActiva.Usuario.Apellidos}";
         }
 
         private void btnEstudiar_Click(object sender, EventArgs e)
@@ -56,7 +54,7 @@ namespace AppFlashCard
             FrmLogin login = new FrmLogin();
             login.Show();
 
-            this.Close();
+            this.Hide();
         }
 
         private void btnCrearFlashcards_Click(object sender, EventArgs e)

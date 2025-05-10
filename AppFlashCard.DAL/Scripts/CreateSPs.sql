@@ -46,7 +46,7 @@ CREATE PROCEDURE [dbo].[SP_LoginUsuario] (
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT Id, Username, Clave
+    SELECT Id, Nombres, Apellidos, Username, Clave
     FROM Usuarios
     WHERE Username = @Username;
 END
@@ -69,6 +69,7 @@ BEGIN
     INSERT INTO Flashcards (UsuarioId, TemaId, Pregunta, Respuesta, FechaCreacion)
     VALUES (@UsuarioId, @TemaId, @Pregunta, @Respuesta, GETDATE());
 END
+
 GO
 CREATE FUNCTION [dbo].[FN_ContarFlashcardsPorTemaUsuario]
 (
@@ -87,8 +88,25 @@ BEGIN
     RETURN @Cantidad;
 END
 GO
+CREATE PROCEDURE [dbo].[SP_ObtenerInfoTemaFlashcards]
+AS
+BEGIN
+    SELECT 
+        m.Nombre AS Materia,
+        t.Nombre AS Tema,
+        u.Username AS Usuario
+    FROM Flashcards f
+    INNER JOIN Temas t ON f.TemaId = t.Id
+    INNER JOIN Materias m ON t.MateriaId = m.Id
+    INNER JOIN Usuarios u ON f.UsuarioId = u.Id
+    GROUP BY m.Nombre, t.Nombre, u.Username
+    ORDER BY m.Nombre, t.Nombre;
+END
+
+GO
+
 SELECT * FROM Flashcards;
-SELECT * FROM Temas;
+SELECT * FROM Materias;
 SELECT * FROM Usuarios;
 -- Reiniciar los ids cuando sea necesario
 DBCC CHECKIDENT ('Usuarios', RESEED, 0); 

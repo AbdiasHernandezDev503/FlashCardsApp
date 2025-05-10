@@ -1,5 +1,6 @@
 ﻿using AppFlashCard.EL;
 using AppFlashCard.DAL;
+using System.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,14 @@ namespace AppFlashCard
 {
     public partial class FrmRegistro : Form
     {
+        private readonly string _connectionString;
+        private readonly UsuarioDAL _usuarioDAL;
+
         public FrmRegistro()
         {
             InitializeComponent();
+            _connectionString = ConfigurationManager.ConnectionStrings["FlashcardsDB"].ConnectionString;
+            _usuarioDAL = new UsuarioDAL(_connectionString);
         }
 
         private void btnSalir_MouseClick(object sender, MouseEventArgs e)
@@ -41,10 +47,9 @@ namespace AppFlashCard
                 FechaNacimiento = dtpFechaNacimiento.Value.Date
             };
 
-            // Conexion temporal se buscara otra forma de obtener la cadena de conexion
-            var dal = new UsuarioDAL("Data Source=LAPTOP-CN5T4MQA\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-
-            var (exito, mensaje) = await dal.RegistrarUsuarioAsync(nuevoUsuario);
+            btnResgistrar.Enabled = false;
+            var (exito, mensaje) = await _usuarioDAL.RegistrarUsuarioAsync(nuevoUsuario);
+            btnResgistrar.Enabled = true;
 
             if (exito)
             {

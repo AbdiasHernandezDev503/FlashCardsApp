@@ -28,46 +28,118 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pbArbol = new PictureBox();
-            panelArbol = new Panel();
-            ((System.ComponentModel.ISupportInitialize)pbArbol).BeginInit();
-            panelArbol.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            menuEstudiar = new MenuStrip();
+            btnSalir = new Button();
+            panelSlider = new Panel();
+            btnIzquierda = new Button();
+            btnDerecha = new Button();
+            animTimer = new System.Windows.Forms.Timer(components);
+            timerAutoSlider = new System.Windows.Forms.Timer(components);
+            timerDelayReinicio = new System.Windows.Forms.Timer(components);
+            label1 = new Label();
             SuspendLayout();
             // 
-            // pbArbol
+            // menuEstudiar
             // 
-            pbArbol.Location = new Point(32, 3);
-            pbArbol.Name = "pbArbol";
-            pbArbol.Size = new Size(982, 371);
-            pbArbol.TabIndex = 0;
-            pbArbol.TabStop = false;
+            menuEstudiar.ImageScalingSize = new Size(20, 20);
+            menuEstudiar.Location = new Point(0, 0);
+            menuEstudiar.Name = "menuEstudiar";
+            menuEstudiar.Size = new Size(1035, 24);
+            menuEstudiar.TabIndex = 0;
+            menuEstudiar.Text = "menuEstudiar";
             // 
-            // panelArbol
+            // btnSalir
             // 
-            panelArbol.BorderStyle = BorderStyle.FixedSingle;
-            panelArbol.Controls.Add(pbArbol);
-            panelArbol.Location = new Point(0, 2);
-            panelArbol.Name = "panelArbol";
-            panelArbol.Size = new Size(1023, 390);
-            panelArbol.TabIndex = 0;
+            btnSalir.Location = new Point(37, 446);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(142, 36);
+            btnSalir.TabIndex = 1;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
+            // 
+            // panelSlider
+            // 
+            panelSlider.Location = new Point(124, 111);
+            panelSlider.Name = "panelSlider";
+            panelSlider.Size = new Size(798, 250);
+            panelSlider.TabIndex = 2;
+            // 
+            // btnIzquierda
+            // 
+            btnIzquierda.Location = new Point(124, 381);
+            btnIzquierda.Name = "btnIzquierda";
+            btnIzquierda.Size = new Size(213, 29);
+            btnIzquierda.TabIndex = 3;
+            btnIzquierda.Text = "<- Atrás";
+            btnIzquierda.UseVisualStyleBackColor = true;
+            btnIzquierda.Click += btnIzquierda_Click;
+            // 
+            // btnDerecha
+            // 
+            btnDerecha.Location = new Point(699, 381);
+            btnDerecha.Name = "btnDerecha";
+            btnDerecha.Size = new Size(189, 29);
+            btnDerecha.TabIndex = 4;
+            btnDerecha.Text = "Siguiente ->";
+            btnDerecha.UseVisualStyleBackColor = true;
+            btnDerecha.Click += btnDerecha_Click;
+            // 
+            // animTimer
+            // 
+            animTimer.Interval = 10;
+            animTimer.Tick += animTimer_Tick;
+            // 
+            // timerAutoSlider
+            // 
+            timerAutoSlider.Enabled = true;
+            timerAutoSlider.Interval = 20000;
+            timerAutoSlider.Tick += timerAutoSlider_Tick;
+            // 
+            // timerDelayReinicio
+            // 
+            timerDelayReinicio.Tick += timerDelayReinicio_Tick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(152, 76);
+            label1.Name = "label1";
+            label1.Size = new Size(748, 32);
+            label1.TabIndex = 5;
+            label1.Text = "FLASHCARDS CREADAS POR NUESTROS USUARIOS";
             // 
             // FrmEstudiar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1035, 570);
-            Controls.Add(panelArbol);
+            Controls.Add(label1);
+            Controls.Add(btnDerecha);
+            Controls.Add(btnIzquierda);
+            Controls.Add(panelSlider);
+            Controls.Add(btnSalir);
+            Controls.Add(menuEstudiar);
+            MainMenuStrip = menuEstudiar;
             Name = "FrmEstudiar";
             Text = "FrmEstudiar";
             Load += FrmEstudiar_Load;
-            ((System.ComponentModel.ISupportInitialize)pbArbol).EndInit();
-            panelArbol.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pbArbol;
-        private Panel panelArbol;
+        private MenuStrip menuEstudiar;
+        private Button btnSalir;
+        private Panel panelSlider;
+        private Button btnIzquierda;
+        private Button btnDerecha;
+        private System.Windows.Forms.Timer animTimer;
+        private System.Windows.Forms.Timer timerAutoSlider;
+        private System.Windows.Forms.Timer timerDelayReinicio;
+        private Label label1;
     }
 }

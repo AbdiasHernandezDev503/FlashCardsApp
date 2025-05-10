@@ -1,4 +1,5 @@
 ﻿using AppFlashCard.EL;
+using AppFlashCard.EL.DTOs;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,43 @@ namespace AppFlashCard.DAL
                 Console.WriteLine(ex.Message);
                 return cantidad;
             }
+        }
+
+        public async Task<List<InfoTemaFlashcard>> ObtenerInfoTemaFlashcardsAsync()
+        {
+            List<InfoTemaFlashcard> lista = new List<InfoTemaFlashcard>();
+            try
+            {
+                await using (var conexion = new SqlConnection(_connectionString))
+                {
+                    await using (var cmd = new SqlCommand("SP_ObtenerInfoTemaFlashcards", conexion))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        await conexion.OpenAsync();
+                        await using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                lista.Add(new InfoTemaFlashcard
+                                {
+                                    Materia = reader["Materia"].ToString(),
+                                    Tema = reader["Tema"].ToString(),
+                                    Usuario = reader["Usuario"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
         }
     }
 }

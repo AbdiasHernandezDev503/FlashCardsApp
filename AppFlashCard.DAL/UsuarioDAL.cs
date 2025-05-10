@@ -73,7 +73,9 @@ namespace AppFlashCard.DAL
                                 return new Usuario
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
-                                    Username = reader["Username"].ToString()
+                                    Username = reader["Username"].ToString(),
+                                    Nombres = reader["Nombres"].ToString(),
+                                    Apellidos = reader["Apellidos"].ToString(),
                                 };
                             }
                         }
