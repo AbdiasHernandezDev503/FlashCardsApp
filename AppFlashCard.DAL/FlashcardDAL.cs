@@ -98,7 +98,51 @@ namespace AppFlashCard.DAL
                                 {
                                     Materia = reader["Materia"].ToString(),
                                     Tema = reader["Tema"].ToString(),
-                                    Usuario = reader["Usuario"].ToString()
+                                    Usuario = reader["Usuario"].ToString(),
+                                    TemaId = Convert.ToInt32(reader["TemaId"]),
+                                    UsuarioId = Convert.ToInt32(reader["UsuarioId"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+        }
+
+        public async Task<List<Flashcard>> ObtenerFlashcardsPorTemaUsuarioAsync(int temaId, int usuarioId)
+        {
+            List<Flashcard> lista = new List<Flashcard>();
+            try
+            {
+                await using (var conexion = new SqlConnection(_connectionString))
+                {
+                    await using (var cmd = new SqlCommand("SP_ObtenerFlashcardsPorTemaYUsuario", conexion))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@TemaId", temaId);
+                        cmd.Parameters.AddWithValue("@UsuarioId", usuarioId);
+                        await conexion.OpenAsync();
+                        await using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                lista.Add(new Flashcard
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    UsuarioId = Convert.ToInt32(reader["UsuarioId"]),
+                                    TemaId = Convert.ToInt32(reader["TemaId"]),
+                                    Pregunta = reader["Pregunta"].ToString(),
+                                    Respuesta = reader["Respuesta"].ToString(),
+                                    FechaCreacion = Convert.ToDateTime(reader["FechaCreacion"])
                                 });
                             }
                         }

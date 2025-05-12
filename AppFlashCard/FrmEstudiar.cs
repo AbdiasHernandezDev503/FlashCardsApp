@@ -208,18 +208,22 @@ namespace AppFlashCard
             }
         }
 
-        private void Card_CursorChanged(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Card_Click(object sender, EventArgs e)
+        private async void Card_Click(object sender, EventArgs e)
         {
             if (sender is Panel panel && panel.Tag is InfoTemaFlashcard info)
             {
                 this.Hide();
-                FrmFlashcardEstudio frmFlashcardEstudio = new FrmFlashcardEstudio();
-                frmFlashcardEstudio.ShowDialog();
+                var flashcards = await _flashcardDAL.ObtenerFlashcardsPorTemaUsuarioAsync(info.TemaId, info.UsuarioId);
+
+                if (flashcards.Any())
+                {
+                    FrmFlashcardEstudio estudio = new FrmFlashcardEstudio(flashcards, info.Tema);
+                    estudio.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Este usuario aún no ha creado flashcards para este tema.");
+                }
             }
         }
 

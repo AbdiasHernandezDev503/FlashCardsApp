@@ -94,13 +94,27 @@ BEGIN
     SELECT 
         m.Nombre AS Materia,
         t.Nombre AS Tema,
-        u.Username AS Usuario
+        u.Username AS Usuario,
+		t.Id AS TemaId,
+		u.Id AS UsuarioId
     FROM Flashcards f
     INNER JOIN Temas t ON f.TemaId = t.Id
     INNER JOIN Materias m ON t.MateriaId = m.Id
     INNER JOIN Usuarios u ON f.UsuarioId = u.Id
-    GROUP BY m.Nombre, t.Nombre, u.Username
+    GROUP BY m.Nombre, t.Nombre, u.Username, t.Id, u.Id
     ORDER BY m.Nombre, t.Nombre;
+END
+GO
+
+CREATE PROCEDURE [dbo].[SP_ObtenerFlashcardsPorTemaYUsuario]
+    @TemaId INT,
+    @UsuarioId INT
+AS
+BEGIN
+    SELECT Id, UsuarioId, TemaId, Pregunta, Respuesta, FechaCreacion
+    FROM Flashcards
+    WHERE TemaId = @TemaId AND UsuarioId = @UsuarioId
+    ORDER BY FechaCreacion ASC
 END
 
 GO
