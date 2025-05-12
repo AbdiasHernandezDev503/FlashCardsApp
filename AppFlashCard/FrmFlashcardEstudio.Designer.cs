@@ -136,7 +136,7 @@
             // 
             // timerFlip
             // 
-            timerFlip.Interval = 10;
+            timerFlip.Interval = 1;
             timerFlip.Tick += timerFlip_Tick;
             // 
             // lblNombreTema
