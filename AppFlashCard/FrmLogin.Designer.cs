@@ -7,25 +7,15 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             lblUsuario = new Label();
@@ -38,7 +28,6 @@
             SuspendLayout();
             // 
             // lblUsuario
-            // 
             lblUsuario.AutoSize = true;
             lblUsuario.Location = new Point(185, 127);
             lblUsuario.Name = "lblUsuario";
@@ -54,7 +43,6 @@
             txtUsername.TabIndex = 1;
             // 
             // lblPasword
-            // 
             lblPasword.AutoSize = true;
             lblPasword.Location = new Point(185, 195);
             lblPasword.Name = "lblPasword";
@@ -81,21 +69,11 @@
             btnIniciarSesion.Click += btnIniciarSesion_Click;
             // 
             // btnRegistrar
-            // 
-            btnRegistrar.Location = new Point(115, 293);
-            btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(185, 35);
-            btnRegistrar.TabIndex = 6;
             btnRegistrar.Text = "Registrarse";
             btnRegistrar.UseVisualStyleBackColor = true;
             btnRegistrar.MouseClick += btnRegistrar_MouseClick;
             // 
             // btnSalir
-            // 
-            btnSalir.Location = new Point(600, 293);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(165, 35);
-            btnSalir.TabIndex = 7;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.MouseClick += btnSalir_MouseClick;
@@ -115,7 +93,6 @@
             Name = "FrmLogin";
             Text = "Form1";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
