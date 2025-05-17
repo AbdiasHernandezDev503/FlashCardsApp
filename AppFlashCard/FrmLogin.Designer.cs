@@ -2,9 +2,6 @@
 {
     partial class FrmLogin
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         protected override void Dispose(bool disposing)
@@ -13,8 +10,6 @@
                 components.Dispose();
             base.Dispose(disposing);
         }
-
-        #region Windows Form Designer generated code
 
         private void InitializeComponent()
         {
@@ -28,12 +23,6 @@
             SuspendLayout();
             // 
             // lblUsuario
-            lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(185, 127);
-            lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(62, 20);
-            lblUsuario.TabIndex = 0;
-            lblUsuario.Text = "Usuario:";
             // 
             // txtUsername
             // 
@@ -43,12 +32,6 @@
             txtUsername.TabIndex = 1;
             // 
             // lblPasword
-            lblPasword.AutoSize = true;
-            lblPasword.Location = new Point(185, 195);
-            lblPasword.Name = "lblPasword";
-            lblPasword.Size = new Size(83, 20);
-            lblPasword.TabIndex = 3;
-            lblPasword.Text = "Contraseña";
             // 
             // txtPassword
             // 
@@ -94,8 +77,6 @@
             Text = "Form1";
             ResumeLayout(false);
         }
-
-        #endregion
 
         private Label lblUsuario;
         private TextBox txtUsername;
