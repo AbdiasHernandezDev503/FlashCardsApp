@@ -1,4 +1,6 @@
-﻿namespace AppFlashCard
+﻿using System.Configuration;
+
+namespace AppFlashCard
 {
     partial class FrmRegistro
     {
@@ -7,10 +9,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,257 +18,269 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            txtNombres = new TextBox();
-            txtApellidos = new TextBox();
-            txtCorreo = new TextBox();
-            txtUsername = new TextBox();
-            txtPassword = new TextBox();
-            txtConfirmPassword = new TextBox();
-            dtpFechaNacimiento = new DateTimePicker();
-            btnResgistrar = new Button();
-            btnSalir = new Button();
-            label5 = new Label();
-            txtTelefono = new TextBox();
-            label9 = new Label();
-            txtCarnet = new TextBox();
-            SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(46, 52);
-            label1.Name = "label1";
-            label1.Size = new Size(73, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Nombres:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(590, 52);
-            label2.Name = "label2";
-            label2.Size = new Size(75, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Apellidos:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(46, 117);
-            label3.Name = "label3";
-            label3.Size = new Size(149, 20);
-            label3.TabIndex = 2;
-            label3.Text = "Fecha de Nacimiento";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(46, 205);
-            label4.Name = "label4";
-            label4.Size = new Size(49, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Email:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(590, 205);
-            label6.Name = "label6";
-            label6.Size = new Size(75, 20);
-            label6.TabIndex = 5;
-            label6.Text = "Username";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(46, 280);
-            label7.Name = "label7";
-            label7.Size = new Size(83, 20);
-            label7.TabIndex = 6;
-            label7.Text = "Contraseña";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(579, 280);
-            label8.Name = "label8";
-            label8.Size = new Size(151, 20);
-            label8.TabIndex = 7;
-            label8.Text = "Confirmar contraseña";
-            // 
-            // txtNombres
-            // 
-            txtNombres.Location = new Point(218, 49);
-            txtNombres.Name = "txtNombres";
-            txtNombres.Size = new Size(295, 27);
-            txtNombres.TabIndex = 8;
-            // 
-            // txtApellidos
-            // 
-            txtApellidos.Location = new Point(738, 52);
-            txtApellidos.Name = "txtApellidos";
-            txtApellidos.Size = new Size(351, 27);
-            txtApellidos.TabIndex = 9;
-            // 
-            // txtCorreo
-            // 
-            txtCorreo.Location = new Point(153, 202);
-            txtCorreo.Name = "txtCorreo";
-            txtCorreo.Size = new Size(321, 27);
-            txtCorreo.TabIndex = 10;
-            // 
-            // txtUsername
-            // 
-            txtUsername.Location = new Point(794, 202);
-            txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(295, 27);
-            txtUsername.TabIndex = 11;
-            // 
-            // txtPassword
-            // 
-            txtPassword.Location = new Point(153, 277);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(321, 27);
-            txtPassword.TabIndex = 12;
-            txtPassword.UseSystemPasswordChar = true;
-            // 
-            // txtConfirmPassword
-            // 
-            txtConfirmPassword.Location = new Point(794, 277);
-            txtConfirmPassword.Name = "txtConfirmPassword";
-            txtConfirmPassword.Size = new Size(295, 27);
-            txtConfirmPassword.TabIndex = 13;
-            txtConfirmPassword.UseSystemPasswordChar = true;
-            // 
-            // dtpFechaNacimiento
-            // 
-            dtpFechaNacimiento.Location = new Point(218, 117);
-            dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            dtpFechaNacimiento.Size = new Size(295, 27);
-            dtpFechaNacimiento.TabIndex = 15;
-            dtpFechaNacimiento.Value = new DateTime(2025, 4, 20, 0, 0, 0, 0);
-            // 
-            // btnResgistrar
-            // 
-            btnResgistrar.Location = new Point(366, 447);
-            btnResgistrar.Name = "btnResgistrar";
-            btnResgistrar.Size = new Size(201, 41);
-            btnResgistrar.TabIndex = 16;
-            btnResgistrar.Text = "Registrarse";
-            btnResgistrar.UseVisualStyleBackColor = true;
-            btnResgistrar.Click += btnResgistrar_Click;
-            // 
-            // btnSalir
-            // 
-            btnSalir.Location = new Point(653, 447);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(199, 41);
-            btnSalir.TabIndex = 17;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.MouseClick += btnSalir_MouseClick;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(590, 117);
-            label5.Name = "label5";
-            label5.Size = new Size(67, 20);
-            label5.TabIndex = 18;
-            label5.Text = "Telefono";
-            // 
-            // txtTelefono
-            // 
-            txtTelefono.Location = new Point(738, 114);
-            txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(351, 27);
-            txtTelefono.TabIndex = 19;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(46, 359);
-            label9.Name = "label9";
-            label9.Size = new Size(218, 20);
-            label9.TabIndex = 20;
-            label9.Text = "Carnet de estudiante (opcional)";
-            // 
-            // txtCarnet
-            // 
-            txtCarnet.Location = new Point(270, 356);
-            txtCarnet.Name = "txtCarnet";
-            txtCarnet.Size = new Size(204, 27);
-            txtCarnet.TabIndex = 21;
-            // 
-            // FrmRegistro
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1203, 535);
-            Controls.Add(txtCarnet);
-            Controls.Add(label9);
-            Controls.Add(txtTelefono);
-            Controls.Add(label5);
-            Controls.Add(btnSalir);
-            Controls.Add(btnResgistrar);
-            Controls.Add(dtpFechaNacimiento);
-            Controls.Add(txtConfirmPassword);
-            Controls.Add(txtPassword);
-            Controls.Add(txtUsername);
-            Controls.Add(txtCorreo);
-            Controls.Add(txtApellidos);
-            Controls.Add(txtNombres);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Name = "FrmRegistro";
-            Text = "Form1";
-            ResumeLayout(false);
-            PerformLayout();
+            this.panelRegistro = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.txtNombres = new System.Windows.Forms.TextBox();
+            this.picNombres = new System.Windows.Forms.PictureBox();
+            this.txtApellidos = new System.Windows.Forms.TextBox();
+            this.picApellidos = new System.Windows.Forms.PictureBox();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.picCorreo = new System.Windows.Forms.PictureBox();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.picTelefono = new System.Windows.Forms.PictureBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.picUsername = new System.Windows.Forms.PictureBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.picPassword = new System.Windows.Forms.PictureBox();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.picConfirmPassword = new System.Windows.Forms.PictureBox();
+            this.txtCarnet = new System.Windows.Forms.TextBox();
+            this.picCarnet = new System.Windows.Forms.PictureBox();
+            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.btnResgistrar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.panelRegistro.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picNombres)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picApellidos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCorreo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picUsername)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picConfirmPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCarnet)).BeginInit();
+            this.SuspendLayout();
+
+            
+            this.panelRegistro.Location = new System.Drawing.Point(50, 30);
+            this.panelRegistro.Size = new System.Drawing.Size(900, 580);
+            this.panelRegistro.BackColor = System.Drawing.Color.FromArgb(66, 71, 105);
+           // this.panelRegistro.Anchor = System.Windows.Forms.AnchorStyles.None;
+
+            //Titulo principal
+            this.lblTitulo.Text = "Crear Cuenta";
+            this.lblTitulo.Font = new System.Drawing.Font("ralewaySemiBold", 18F, System.Drawing.FontStyle.Bold);
+            this.lblTitulo.ForeColor = System.Drawing.Color.White;
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(370, 20);
+            this.panelRegistro.Controls.Add(this.lblTitulo);
+
+            // Label: Nombres
+            Label lblNombres = new Label();
+            lblNombres.Text = "Nombres:";
+            lblNombres.ForeColor = Color.White;
+            lblNombres.AutoSize = true;
+            lblNombres.Location = new Point(95, 60);
+            this.panelRegistro.Controls.Add(lblNombres);
+
+            // Campo: Nombres
+            this.picNombres.Location = new System.Drawing.Point(60, 80);
+            this.picNombres.Size = new System.Drawing.Size(24, 24);
+            this.picNombres.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picNombres.Image = System.Drawing.Image.FromFile("Images/user.png"); 
+            this.txtNombres.Location = new System.Drawing.Point(90, 80);
+            this.txtNombres.Size = new System.Drawing.Size(260, 27);
+            this.txtNombres.PlaceholderText = "Nombres";
+            this.panelRegistro.Controls.Add(this.picNombres);
+            this.panelRegistro.Controls.Add(this.txtNombres);
+
+            // Label: Apellidos
+            Label lblApellidos = new Label();
+            lblApellidos.Text = "Apellidos:";
+            lblApellidos.ForeColor = Color.White;
+            lblApellidos.AutoSize = true;
+            lblApellidos.Location = new Point(530, 60);
+            this.panelRegistro.Controls.Add(lblApellidos);
+
+            // Campo: Apellidos
+            this.picApellidos.Location = new System.Drawing.Point(500, 80);
+            this.picApellidos.Size = new System.Drawing.Size(24, 24);
+            this.picApellidos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picApellidos.Image = System.Drawing.Image.FromFile("Images/apellido.png");
+            this.txtApellidos.Location = new System.Drawing.Point(530, 80);
+            this.txtApellidos.Size = new System.Drawing.Size(260, 27);
+            this.txtApellidos.PlaceholderText = "Apellidos";
+            this.panelRegistro.Controls.Add(this.picApellidos);
+            this.panelRegistro.Controls.Add(this.txtApellidos);
+
+            // Label: Correo
+            Label lblCorreo = new Label();
+            lblCorreo.Text = "Correo:";
+            lblCorreo.ForeColor = Color.White;
+            lblCorreo.AutoSize = true;
+            lblCorreo.Location = new Point(90, 110);
+            this.panelRegistro.Controls.Add(lblCorreo);
+
+            // Campo: Correo
+            this.picCorreo.Location = new System.Drawing.Point(60, 130);
+            this.picCorreo.Size = new System.Drawing.Size(24, 24);
+            this.picCorreo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCorreo.Image = System.Drawing.Image.FromFile("Images/email.png");
+            this.txtCorreo.Location = new System.Drawing.Point(90, 130);
+            this.txtCorreo.Size = new System.Drawing.Size(260, 27);
+            this.txtCorreo.PlaceholderText = "Correo";
+            this.panelRegistro.Controls.Add(this.picCorreo);
+            this.panelRegistro.Controls.Add(this.txtCorreo);
+
+            // Label: Teléfono
+            Label lblTelefono = new Label();
+            lblTelefono.Text = "Teléfono:";
+            lblTelefono.ForeColor = Color.White;
+            lblTelefono.AutoSize = true;
+            lblTelefono.Location = new Point(530, 110);
+            this.panelRegistro.Controls.Add(lblTelefono);
+
+            // Campo: Teléfono
+            this.picTelefono.Location = new System.Drawing.Point(500, 130);
+            this.picTelefono.Size = new System.Drawing.Size(24, 24);
+            this.picTelefono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTelefono.Image = System.Drawing.Image.FromFile("Images/phone.png"); 
+            this.txtTelefono.Location = new System.Drawing.Point(530, 130);
+            this.txtTelefono.Size = new System.Drawing.Size(260, 27);
+            this.txtTelefono.PlaceholderText = "Teléfono";
+            this.panelRegistro.Controls.Add(this.picTelefono);
+            this.panelRegistro.Controls.Add(this.txtTelefono);
+
+            // Label: Usuario
+            Label lblUsuario = new Label();
+            lblUsuario.Text = "Usuario:";
+            lblUsuario.ForeColor = Color.White;
+            lblUsuario.AutoSize = true;
+            lblUsuario.Location = new Point(90, 160);
+            this.panelRegistro.Controls.Add(lblUsuario);
+
+            // Campo: Username
+            this.picUsername.Location = new System.Drawing.Point(60, 180);
+            this.picUsername.Size = new System.Drawing.Size(24, 24);
+            this.picUsername.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picUsername.Image = System.Drawing.Image.FromFile("Images/username.png");
+            this.txtUsername.Location = new System.Drawing.Point(90, 180);
+            this.txtUsername.Size = new System.Drawing.Size(260, 27);
+            this.txtUsername.PlaceholderText = "Usuario";
+            this.panelRegistro.Controls.Add(this.picUsername);
+            this.panelRegistro.Controls.Add(this.txtUsername);
+
+            // Label: Contraseña
+            Label lblPassword = new Label();
+            lblPassword.Text = "Contraseña:";
+            lblPassword.ForeColor = Color.White;
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new Point(530, 160);
+            this.panelRegistro.Controls.Add(lblPassword);
+
+            // Campo: Contraseña
+            this.picPassword.Location = new System.Drawing.Point(500, 180);
+            this.picPassword.Size = new System.Drawing.Size(24, 24);
+            this.picPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPassword.Image = System.Drawing.Image.FromFile("Images/icono_password.png"); 
+            this.txtPassword.Location = new System.Drawing.Point(530, 180);
+            this.txtPassword.Size = new System.Drawing.Size(260, 27);
+            this.txtPassword.PlaceholderText = "Contraseña";
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.panelRegistro.Controls.Add(this.picPassword);
+            this.panelRegistro.Controls.Add(this.txtPassword);
+
+            // Label: Confirmar Contraseña
+            Label lblConfirmar = new Label();
+            lblConfirmar.Text = "Confirmar contraseña:";
+            lblConfirmar.ForeColor = Color.White;
+            lblConfirmar.AutoSize = true;
+            lblConfirmar.Location = new Point(90, 210);
+            this.panelRegistro.Controls.Add(lblConfirmar);
+
+            // Campo: Confirmar contraseña
+            this.picConfirmPassword.Location = new System.Drawing.Point(60, 230);
+            this.picConfirmPassword.Size = new System.Drawing.Size(24, 24);
+            this.picConfirmPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picConfirmPassword.Image = System.Drawing.Image.FromFile("Images/confirm.png");
+            this.txtConfirmPassword.Location = new System.Drawing.Point(90, 230);
+            this.txtConfirmPassword.Size = new System.Drawing.Size(260, 27);
+            this.txtConfirmPassword.PlaceholderText = "Confirmar";
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
+            this.panelRegistro.Controls.Add(this.picConfirmPassword);
+            this.panelRegistro.Controls.Add(this.txtConfirmPassword);
+
+            // Label: Carnet
+            Label lblCarnet = new Label();
+            lblCarnet.Text = "Carnet de estudiante:";
+            lblCarnet.ForeColor = Color.White;
+            lblCarnet.AutoSize = true;
+            lblCarnet.Location = new Point(530, 210);
+            this.panelRegistro.Controls.Add(lblCarnet);
+
+            // Campo: Carnet
+            this.picCarnet.Location = new System.Drawing.Point(500, 230);
+            this.picCarnet.Size = new System.Drawing.Size(24, 24);
+            this.picCarnet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCarnet.Image = System.Drawing.Image.FromFile("Images/card.png"); 
+            this.txtCarnet.Location = new System.Drawing.Point(530, 230);
+            this.txtCarnet.Size = new System.Drawing.Size(260, 27);
+            this.txtCarnet.PlaceholderText = "Carnet";
+            this.panelRegistro.Controls.Add(this.picCarnet);
+            this.panelRegistro.Controls.Add(this.txtCarnet);
+
+            // Label: Fecha de Nacimiento
+            Label lblFecha = new Label();
+            lblFecha.Text = "Fecha de Nacimiento:";
+            lblFecha.ForeColor = Color.White;
+            lblFecha.AutoSize = true;
+            lblFecha.Location = new Point(90, 260);
+            this.panelRegistro.Controls.Add(lblFecha);
+
+            // FechaNacimiento
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(90, 280);
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(300, 27);
+            this.panelRegistro.Controls.Add(this.dtpFechaNacimiento);
+
+            // Botón Registrarse
+            this.btnResgistrar.Text = "Registrarse";
+            this.btnResgistrar.Location = new System.Drawing.Point(250, 350);
+            this.btnResgistrar.Size = new System.Drawing.Size(150, 40);
+            this.btnResgistrar.Click += new System.EventHandler(this.btnResgistrar_Click);
+            this.panelRegistro.Controls.Add(this.btnResgistrar);
+
+            // Botón Salir
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Location = new System.Drawing.Point(450, 350);
+            this.btnSalir.Size = new System.Drawing.Size(150, 40);
+            this.btnSalir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnSalir_MouseClick);
+            this.panelRegistro.Controls.Add(this.btnSalir);
+
+            //Configuración final del formulario
+            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Controls.Add(this.panelRegistro);
+            this.Name = "FrmRegistro";
+            this.Text = "Registro de Usuario";
+            this.Load += new System.EventHandler(this.FrmRegistro_Load);
+            this.Resize += new System.EventHandler(this.FrmRegistro_Resize);
+
+            this.panelRegistro.ResumeLayout(false);
+            this.panelRegistro.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picNombres)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picApellidos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCorreo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picUsername)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picConfirmPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCarnet)).EndInit();
+            this.ResumeLayout(false);
         }
 
-        #endregion
-
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private TextBox txtNombres;
-        private TextBox txtApellidos;
-        private TextBox txtCorreo;
-        private TextBox txtUsername;
-        private TextBox txtPassword;
-        private TextBox txtConfirmPassword;
-        private DateTimePicker dtpFechaNacimiento;
-        private Button btnResgistrar;
-        private Button btnSalir;
-        private Label label5;
-        private TextBox txtTelefono;
-        private Label label9;
-        private TextBox txtCarnet;
+        //Declaración de campos del formulario
+        private System.Windows.Forms.Panel panelRegistro;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.TextBox txtNombres, txtApellidos, txtCorreo, txtTelefono, txtUsername, txtPassword, txtConfirmPassword, txtCarnet;
+        private System.Windows.Forms.PictureBox picNombres, picApellidos, picCorreo, picTelefono, picUsername, picPassword, picConfirmPassword, picCarnet;
+        private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
+        private System.Windows.Forms.Button btnResgistrar;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
+
+
+
+
+
+

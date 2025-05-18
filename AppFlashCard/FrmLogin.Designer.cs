@@ -15,6 +15,7 @@
 
         private void InitializeComponent()
         {
+            //Contenedor de todos los controles
             this.panelLogin = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.picPerfil = new System.Windows.Forms.PictureBox();
@@ -51,7 +52,7 @@
             this.panelLogin.Size = new System.Drawing.Size(400, 360);
             this.panelLogin.TabIndex = 0;
 
-            // lblTitulo
+            // Etiqueta lblTitulo
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Location = new System.Drawing.Point(120, 90);
             this.lblTitulo.Name = "lblTitulo";
@@ -59,7 +60,7 @@
             this.lblTitulo.Text = "Iniciar Sesión";
             this.lblTitulo.TabIndex = 1;
 
-            // picPerfil
+            // Imagen del Perfil
             this.picPerfil.Image = System.Drawing.Image.FromFile("Images/user_login.png");
             this.picPerfil.Location = new System.Drawing.Point(165, 10);
             this.picPerfil.Name = "picPerfil";
@@ -67,7 +68,7 @@
             this.picPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picPerfil.TabIndex = 2;
 
-            // table
+            // tabla con iconos, cajas de textos usuario y contraseña 
             this.table.ColumnCount = 2;
             this.table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -83,34 +84,34 @@
             this.table.Size = new System.Drawing.Size(310, 60);
             this.table.TabIndex = 3;
 
-            // picUser
+            // icono de usuario 
             this.picUser.Image = System.Drawing.Image.FromFile("Images/icon_user1.png");
             this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picUser.Size = new System.Drawing.Size(24, 24);
             this.picUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.picUser.TabIndex = 4;
 
-            // txtUsername
+            // Caja de texto de usuario 
             this.txtUsername.PlaceholderText = "Escribe tu usuario";
             this.txtUsername.Size = new System.Drawing.Size(200, 25);
             this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUsername.TabIndex = 7;
 
-            // picLock
+            // Icono de candado
             this.picLock.Image = System.Drawing.Image.FromFile("Images/icon_lock.png");
             this.picLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLock.Size = new System.Drawing.Size(24, 24);
             this.picLock.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.picLock.TabIndex = 4;
 
-            // txtPassword
+            // Caja de texto de contraseña
             this.txtPassword.PlaceholderText = "Escribe tu contraseña";
             this.txtPassword.Size = new System.Drawing.Size(200, 27);
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtPassword.TabIndex = 7;
 
-            // chkMostrarPassword
+            // Checkbox mostrar/ocultar contraseña
             this.chkMostrarPassword.AutoSize = true;
             this.chkMostrarPassword.Location = new System.Drawing.Point(70, 205);
             this.chkMostrarPassword.Text = "Mostrar contraseña";
@@ -145,7 +146,7 @@
             this.btnSalir.TabIndex = 11;
 
 
-            // FrmLogin
+            // Propiedades de FrmLogin
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 600);
             this.Controls.Add(this.picDecoracion);
@@ -155,12 +156,13 @@
             this.Resize += new System.EventHandler(this.FrmLogin_Resize);
             this.Load += new System.EventHandler(this.FrmLogin_Load);
 
+            // Libera recursos utilizados por PictureBox y Panel
             ((System.ComponentModel.ISupportInitialize)(this.picPerfil)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDecoracion)).EndInit();
             this.panelLogin.ResumeLayout(false);
-            this.panelLogin.PerformLayout();
+            this.panelLogin.PerformLayout(); // Aplica diseño de los controles contenidos
             this.table.ResumeLayout(false);
             this.table.PerformLayout();
             this.ResumeLayout(false);
