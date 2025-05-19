@@ -27,6 +27,7 @@
     <None Remove="Images\user.png" />
     <None Remove="Images\username.png" />
     <None Remove="Images\user_login.png" />
+    <None Remove="Images\view.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,11 +79,18 @@
     <Content Include="Images\user_login.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\view.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Fonts\Raleway-Regular.ttf" />
-    <EmbeddedResource Include="Fonts\Raleway-SemiBold.ttf" />
+    <EmbeddedResource Include="Fonts\Raleway-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fonts\Raleway-SemiBold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

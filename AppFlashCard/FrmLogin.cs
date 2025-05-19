@@ -114,7 +114,13 @@ namespace AppFlashCard
             CargarTTF("AppFlashCard.Fonts.Raleway-SemiBold.ttf");
 
             ralewayRegular = new Font(fuentesPersonalizadas.Families[0], 12f, FontStyle.Regular);
-            ralewaySemiBold = new Font(fuentesPersonalizadas.Families[1], 11f, FontStyle.Bold);
+            ralewaySemiBold = new Font(
+                fuentesPersonalizadas.Families.Length > 1
+                    ? fuentesPersonalizadas.Families[1]
+                    : fuentesPersonalizadas.Families[0],
+                12f, FontStyle.Bold
+            );
+
         }
 
         private void AnimarEntrada(object sender, EventArgs e)

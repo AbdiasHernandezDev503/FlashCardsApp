@@ -119,8 +119,8 @@
             this.chkMostrarPassword.TabIndex = 8;
 
             // btnRegistrar
-            this.btnRegistrar.Location = new System.Drawing.Point(30, 260);
-            this.btnRegistrar.Size = new System.Drawing.Size(100, 30);
+            this.btnRegistrar.Location = new System.Drawing.Point(35, 260);
+            this.btnRegistrar.Size = new System.Drawing.Size(106, 30);
             this.btnRegistrar.Text = "Registrarse";
             this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistrar.FlatAppearance.BorderSize = 0;
@@ -128,7 +128,7 @@
             this.btnRegistrar.TabIndex = 9;
 
             // btnIniciarSesion
-            this.btnIniciarSesion.Location = new System.Drawing.Point(145, 260);
+            this.btnIniciarSesion.Location = new System.Drawing.Point(155, 260);
             this.btnIniciarSesion.Size = new System.Drawing.Size(105, 30);
             this.btnIniciarSesion.Text = "Iniciar sesión";
             this.btnIniciarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -137,7 +137,7 @@
             this.btnIniciarSesion.TabIndex = 10;
 
             // btnSalir
-            this.btnSalir.Location = new System.Drawing.Point(270, 260);
+            this.btnSalir.Location = new System.Drawing.Point(275, 260);
             this.btnSalir.Size = new System.Drawing.Size(70, 30);
             this.btnSalir.Text = "Salir";
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

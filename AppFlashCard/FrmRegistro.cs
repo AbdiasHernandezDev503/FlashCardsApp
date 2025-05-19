@@ -32,6 +32,7 @@ namespace AppFlashCard
             this.Load += FrmRegistro_Load;
             this.Resize += FrmRegistro_Resize;
             this.WindowState = FormWindowState.Maximized;
+
         }
 
         //Estiliza el formulario
@@ -107,7 +108,7 @@ namespace AppFlashCard
             CargarTTF("AppFlashCard.Fonts.Raleway-SemiBold.ttf");
 
             ralewayRegular = new Font(fuentesPersonalizadas.Families[0], 12f, FontStyle.Regular);
-            ralewaySemiBold = new Font(fuentesPersonalizadas.Families[1], 11f, FontStyle.Bold);
+            ralewaySemiBold = new Font(fuentesPersonalizadas.Families[0], 11f, FontStyle.Bold);
         }
 
         private GraphicsPath CrearRegionRedondeada(Rectangle rect, int radio)
