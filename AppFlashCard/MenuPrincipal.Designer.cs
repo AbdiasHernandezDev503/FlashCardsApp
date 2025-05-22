@@ -37,9 +37,10 @@
             // 
             // btnEstudiar
             // 
-            btnEstudiar.Location = new Point(72, 118);
+            btnEstudiar.Location = new Point(171, 148);
+            btnEstudiar.Margin = new Padding(4, 4, 4, 4);
             btnEstudiar.Name = "btnEstudiar";
-            btnEstudiar.Size = new Size(169, 44);
+            btnEstudiar.Size = new Size(211, 55);
             btnEstudiar.TabIndex = 0;
             btnEstudiar.Text = "Estudiar flashcards";
             btnEstudiar.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@
             // 
             // btnCrearFlashcards
             // 
-            btnCrearFlashcards.Location = new Point(321, 118);
+            btnCrearFlashcards.Location = new Point(492, 148);
+            btnCrearFlashcards.Margin = new Padding(4, 4, 4, 4);
             btnCrearFlashcards.Name = "btnCrearFlashcards";
-            btnCrearFlashcards.Size = new Size(159, 44);
+            btnCrearFlashcards.Size = new Size(199, 55);
             btnCrearFlashcards.TabIndex = 1;
             btnCrearFlashcards.Text = "Crear Flashcards";
             btnCrearFlashcards.UseVisualStyleBackColor = true;
@@ -57,18 +59,20 @@
             // 
             // button3
             // 
-            button3.Location = new Point(72, 215);
+            button3.Location = new Point(171, 365);
+            button3.Margin = new Padding(4, 4, 4, 4);
             button3.Name = "button3";
-            button3.Size = new Size(169, 44);
+            button3.Size = new Size(211, 55);
             button3.TabIndex = 2;
             button3.Text = "Mi Usuario";
             button3.UseVisualStyleBackColor = true;
             // 
             // btnCerrarSesion
             // 
-            btnCerrarSesion.Location = new Point(321, 215);
+            btnCerrarSesion.Location = new Point(492, 365);
+            btnCerrarSesion.Margin = new Padding(4, 4, 4, 4);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(159, 44);
+            btnCerrarSesion.Size = new Size(199, 55);
             btnCerrarSesion.TabIndex = 3;
             btnCerrarSesion.Text = "Cerrar Sesión";
             btnCerrarSesion.UseVisualStyleBackColor = true;
@@ -77,21 +81,23 @@
             // lblBienvenida
             // 
             lblBienvenida.AutoSize = true;
-            lblBienvenida.Location = new Point(173, 29);
+            lblBienvenida.Location = new Point(216, 36);
+            lblBienvenida.Margin = new Padding(4, 0, 4, 0);
             lblBienvenida.Name = "lblBienvenida";
-            lblBienvenida.Size = new Size(0, 20);
+            lblBienvenida.Size = new Size(0, 25);
             lblBienvenida.TabIndex = 4;
             // 
             // MenuPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(708, 450);
+            ClientSize = new Size(885, 562);
             Controls.Add(lblBienvenida);
             Controls.Add(btnCerrarSesion);
             Controls.Add(button3);
             Controls.Add(btnCrearFlashcards);
             Controls.Add(btnEstudiar);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "MenuPrincipal";
             Text = "MenuPrincipal";
             Load += MenuPrincipal_Load;
