@@ -33,7 +33,8 @@ namespace AppFlashCard
 
                 this.Close(); // Cierra el acceso no autorizado
                 return;
-            } else 
+            }
+            else
                 lblBienvenida.Text = $"Bienvenido, {SesionActiva.Usuario.Nombres} {SesionActiva.Usuario.Apellidos}";
         }
 
@@ -63,6 +64,11 @@ namespace AppFlashCard
 
             FrmCrearFlashcard frmCrearFlashcard = new FrmCrearFlashcard();
             frmCrearFlashcard.Show();
+        }
+
+        private void lblBienvenida_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
