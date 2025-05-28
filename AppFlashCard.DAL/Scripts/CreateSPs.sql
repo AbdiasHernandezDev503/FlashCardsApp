@@ -96,7 +96,8 @@ BEGIN
         t.Nombre AS Tema,
         u.Username AS Usuario,
 		t.Id AS TemaId,
-		u.Id AS UsuarioId
+		u.Id AS UsuarioId,
+		MIN(f.FechaCreacion) AS FechaCreacion
     FROM Flashcards f
     INNER JOIN Temas t ON f.TemaId = t.Id
     INNER JOIN Materias m ON t.MateriaId = m.Id

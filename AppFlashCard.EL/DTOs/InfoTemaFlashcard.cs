@@ -12,7 +12,8 @@ namespace AppFlashCard.EL.DTOs
         public string Tema { get; set; }    
         public string Usuario { get; set; }
         public int UsuarioId { get; set; }
-        public int TemaId { get; set; } 
+        public int TemaId { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
     }
 }

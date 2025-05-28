@@ -271,7 +271,6 @@ namespace AppFlashCard
             if (sender is ToolStripMenuItem item && item.Tag is List<Materia> materias)
             {
                 MessageBox.Show($"Ver todas las materias ({materias.Count})");
-                // Aquí podrías abrir una vista tipo grid o lista
             }
         }
 
@@ -280,10 +279,6 @@ namespace AppFlashCard
             if (sender is ToolStripMenuItem item && item.Tag is Materia materia)
             {
                 MessageBox.Show($"Mostrar todos los temas de: {materia.Nombre}");
-
-                // Aquí podrías abrir una ventana que muestre todos los temas de esa materia
-                // Ejemplo:
-                // new FrmTodosLosTemas(materia).Show();
             }
         }
 

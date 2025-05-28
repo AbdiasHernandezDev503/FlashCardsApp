@@ -100,7 +100,8 @@ namespace AppFlashCard.DAL
                                     Tema = reader["Tema"].ToString(),
                                     Usuario = reader["Usuario"].ToString(),
                                     TemaId = Convert.ToInt32(reader["TemaId"]),
-                                    UsuarioId = Convert.ToInt32(reader["UsuarioId"])
+                                    UsuarioId = Convert.ToInt32(reader["UsuarioId"]),
+                                    FechaCreacion = Convert.ToDateTime(reader["FechaCreacion"])
                                 });
                             }
                         }
