@@ -118,7 +118,7 @@ namespace AppFlashCard
                 }
 
                 if (materia.Temas.Count > maximoTemas)
-                {
+                { 
                     var verTodosTemasItem = new ToolStripMenuItem("Ver Todos")
                     {
                         Tag = materia

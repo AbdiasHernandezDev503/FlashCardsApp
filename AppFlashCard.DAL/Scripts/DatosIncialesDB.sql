@@ -8,7 +8,12 @@ VALUES
 ('Ciencias'),
 ('Historia'),
 ('Inglés'),
-('Programación');
+('Programación'),
+('Tecnología'),
+('Arte'),
+('Educación Física'),
+('Economía'),
+('Literatura');
 
 -- Obtener los IDs recién insertados (usando variables si fuera necesario)
 -- O asume que los IDs se asignan del 1 al 5 según el orden
@@ -42,4 +47,43 @@ INSERT INTO Temas (Nombre, MateriaId)
 VALUES 
 ('Estructuras de control', 5),
 ('POO en C#', 5);
+
+-- Temas para Tecnología (más de 5 temas)
+INSERT INTO Temas (Nombre, MateriaId)
+VALUES 
+('Redes de computadoras', 6),
+('Ciberseguridad', 6),
+('Desarrollo Web', 6),
+('Inteligencia Artificial', 6),
+('Hardware y Software', 6),
+('Bases de Datos', 6),
+('Sistemas Operativos', 6);
+
+-- Temas para Arte
+INSERT INTO Temas (Nombre, MateriaId)
+VALUES 
+('Historia del arte', 7),
+('Técnicas de pintura', 7),
+('Arte contemporáneo', 7);
+
+-- Temas para Educación Física
+INSERT INTO Temas (Nombre, MateriaId)
+VALUES 
+('Reglas del fútbol', 8),
+('Calentamiento y estiramiento', 8),
+('Hábitos saludables', 8);
+
+-- Temas para Economía
+INSERT INTO Temas (Nombre, MateriaId)
+VALUES 
+('Microeconomía', 9),
+('Macroeconomía', 9),
+('Inflación y precios', 9);
+
+-- Temas para Literatura
+INSERT INTO Temas (Nombre, MateriaId)
+VALUES 
+('Literatura clásica', 10),
+('Poesía moderna', 10),
+('Análisis de novelas', 10);
 
