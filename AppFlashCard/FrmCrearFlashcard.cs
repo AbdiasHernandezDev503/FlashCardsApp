@@ -99,7 +99,7 @@ namespace AppFlashCard
                 txtPregunta.Clear();
                 txtRespuesta.Clear();
                 cbMaterias.SelectedIndex = -1;
-                cbTemas.SelectedIndex = -1; 
+                cbTemas.SelectedIndex = -1;
             }
             else
             {
@@ -140,6 +140,16 @@ namespace AppFlashCard
                 lblContador.Text = "";
                 btnGuardar.Enabled = false;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
