@@ -70,5 +70,10 @@ namespace AppFlashCard
         {
 
         }
+
+        private void btnMiUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
