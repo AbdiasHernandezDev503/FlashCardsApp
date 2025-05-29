@@ -259,10 +259,10 @@ namespace AppFlashCard
         {
             if (sender is ToolStripMenuItem item && item.Tag is Tema tema)
             {
-                MessageBox.Show($"Seleccionaste el tema: {tema.Nombre} (ID: {tema.Id})");
 
-                // Aquí podés abrir el formulario de estudio o cargar las flashcards del tema
-                // new FrmEstudiarTema(tema).Show(); por ejemplo
+                FrmTemasMaterias frmTemasMaterias = new FrmTemasMaterias(null, tema.Nombre);
+                this.Hide();
+                frmTemasMaterias.Show();
             }
         }
 
@@ -270,7 +270,9 @@ namespace AppFlashCard
         {
             if (sender is ToolStripMenuItem item && item.Tag is List<Materia> materias)
             {
-                MessageBox.Show($"Ver todas las materias ({materias.Count})");
+                FrmTemasMaterias frmTemasMaterias = new FrmTemasMaterias(null, null); 
+                this.Hide();
+                frmTemasMaterias.Show();
             }
         }
 
@@ -278,7 +280,9 @@ namespace AppFlashCard
         {
             if (sender is ToolStripMenuItem item && item.Tag is Materia materia)
             {
-                MessageBox.Show($"Mostrar todos los temas de: {materia.Nombre}");
+                FrmTemasMaterias frmTemasMaterias = new FrmTemasMaterias(materia, null);
+                this.Hide();
+                frmTemasMaterias.Show();
             }
         }
 

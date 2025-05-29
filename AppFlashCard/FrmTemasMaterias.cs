@@ -1,4 +1,5 @@
 ﻿using AppFlashCard.DAL;
+using AppFlashCard.EL;
 using AppFlashCard.EL.DTOs;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,20 @@ namespace AppFlashCard
 {
     public partial class FrmTemasMaterias : Form
     {
+        private readonly Materia _materiaSeleccionada;
+        private readonly string _temaSeleccionado;
         private readonly string _connectionString;
         private readonly FlashcardDAL _flashcardDAL;
 
         private List<InfoTemaFlashcard> listaTemasMaterias = new();
 
-        public FrmTemasMaterias()
+        public FrmTemasMaterias(Materia materia, string temaSeleccionado)
         {
             InitializeComponent();
             txtBusqueda.Text = "Escribe el valor de la búsqueda";
 
+            _materiaSeleccionada = materia;
+            _temaSeleccionado = temaSeleccionado;
             _connectionString = ConfigurationManager.ConnectionStrings["FlashcardsDB"].ConnectionString;
             _flashcardDAL = new FlashcardDAL(_connectionString);
         }
@@ -33,6 +38,25 @@ namespace AppFlashCard
         {
             AplicarEstiloTabla();
             listaTemasMaterias = await _flashcardDAL.ObtenerInfoTemaFlashcardsAsync();
+
+            if (_materiaSeleccionada != null)
+            {
+                listaTemasMaterias = listaTemasMaterias
+                    .Where(x => x.Materia.Equals(_materiaSeleccionada.Nombre, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                Text = $"Flashcards de la materia: {_materiaSeleccionada.Nombre}";
+            }
+            else if (!string.IsNullOrEmpty(_temaSeleccionado))
+            {
+                listaTemasMaterias = listaTemasMaterias
+                    .Where(x => x.Tema.Equals(_temaSeleccionado, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                Text = $"Flashcards del tema: {_temaSeleccionado}";
+            }
+
+
             dgvTemasMaterias.DataSource = listaTemasMaterias;
 
             if (!dgvTemasMaterias.Columns.Contains("Accion"))
@@ -77,7 +101,6 @@ namespace AppFlashCard
 
         private void AplicarEstiloTabla()
         {
-            // Bordes y colores generales
             dgvTemasMaterias.BorderStyle = BorderStyle.None;
             dgvTemasMaterias.BackgroundColor = Color.White;
             dgvTemasMaterias.EnableHeadersVisualStyles = false;
@@ -86,14 +109,12 @@ namespace AppFlashCard
             dgvTemasMaterias.AllowUserToResizeRows = false;
             dgvTemasMaterias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            // Cabecera
             dgvTemasMaterias.ColumnHeadersDefaultCellStyle.BackColor = Color.MediumPurple;
             dgvTemasMaterias.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvTemasMaterias.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dgvTemasMaterias.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvTemasMaterias.ColumnHeadersHeight = 40;
 
-            // Filas
             dgvTemasMaterias.DefaultCellStyle.BackColor = Color.White;
             dgvTemasMaterias.DefaultCellStyle.ForeColor = Color.Black;
             dgvTemasMaterias.DefaultCellStyle.Font = new Font("Segoe UI", 10);
@@ -101,7 +122,6 @@ namespace AppFlashCard
             dgvTemasMaterias.DefaultCellStyle.SelectionForeColor = Color.White;
             dgvTemasMaterias.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            // Alternancia de color
             dgvTemasMaterias.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
         }
 
@@ -169,7 +189,7 @@ namespace AppFlashCard
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtBusqueda.Clear();
-            cbFiltros.SelectedIndex = -1; // O selecciona "Materia" por defecto si querés
+            cbFiltros.SelectedIndex = -1; 
             dgvTemasMaterias.DataSource = null;
             dgvTemasMaterias.Columns.Clear();
             dgvTemasMaterias.DataSource = listaTemasMaterias;
@@ -194,7 +214,7 @@ namespace AppFlashCard
         {
             if (string.IsNullOrWhiteSpace(txtBusqueda.Text))
             {
-                btnLimpiar.PerformClick();
+                // btnLimpiar.PerformClick();
             }
         }
 
@@ -214,6 +234,13 @@ namespace AppFlashCard
                 txtBusqueda.Text = "Escribe el valor de la búsqueda";
                 txtBusqueda.ForeColor = Color.Gray;
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            FrmEstudiar frmEstudiar = new FrmEstudiar();
+            frmEstudiar.Show();
         }
     }
 }

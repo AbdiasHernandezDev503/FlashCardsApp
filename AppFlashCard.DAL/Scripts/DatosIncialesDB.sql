@@ -64,7 +64,11 @@ INSERT INTO Temas (Nombre, MateriaId)
 VALUES 
 ('Historia del arte', 7),
 ('Técnicas de pintura', 7),
-('Arte contemporáneo', 7);
+('Arte contemporáneo', 7),
+('Arte abstracto', 7),
+('Arte 1', 7),
+('Arte 2', 7),
+('Arte 3', 7);
 
 -- Temas para Educación Física
 INSERT INTO Temas (Nombre, MateriaId)

@@ -61,6 +61,7 @@
             // 
             // panelSlider
             // 
+            panelSlider.BorderStyle = BorderStyle.Fixed3D;
             panelSlider.Location = new Point(124, 111);
             panelSlider.Name = "panelSlider";
             panelSlider.Size = new Size(798, 250);
