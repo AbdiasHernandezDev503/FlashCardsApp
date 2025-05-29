@@ -135,6 +135,7 @@
             // 
             txtRespuesta.BackColor = Color.FromArgb(77, 79, 117);
             txtRespuesta.BorderStyle = BorderStyle.None;
+            txtRespuesta.ForeColor = Color.White;
             txtRespuesta.Location = new Point(629, 269);
             txtRespuesta.Margin = new Padding(3, 2, 3, 2);
             txtRespuesta.Name = "txtRespuesta";
@@ -146,7 +147,7 @@
             // 
             txtPregunta.BackColor = Color.FromArgb(77, 79, 117);
             txtPregunta.BorderStyle = BorderStyle.None;
-            txtPregunta.ForeColor = SystemColors.ActiveCaptionText;
+            txtPregunta.ForeColor = Color.White;
             txtPregunta.Location = new Point(629, 111);
             txtPregunta.Margin = new Padding(3, 2, 3, 2);
             txtPregunta.Name = "txtPregunta";
