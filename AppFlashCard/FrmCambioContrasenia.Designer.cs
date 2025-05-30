@@ -104,6 +104,7 @@
             // 
             // button2
             // 
+            button2.ForeColor = SystemColors.ControlText;
             button2.Location = new Point(247, 341);
             button2.Name = "button2";
             button2.Size = new Size(111, 31);

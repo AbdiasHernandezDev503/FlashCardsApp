@@ -47,7 +47,7 @@
             btnGuardar.BackColor = Color.FromArgb(248, 187, 132);
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnGuardar.ForeColor = Color.White;
+            btnGuardar.ForeColor = Color.Black;
             btnGuardar.Location = new Point(116, 308);
             btnGuardar.Margin = new Padding(3, 2, 3, 2);
             btnGuardar.Name = "btnGuardar";
@@ -64,7 +64,7 @@
             btnSalir.FlatAppearance.BorderSize = 0;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSalir.ForeColor = Color.White;
+            btnSalir.ForeColor = Color.Black;
             btnSalir.Location = new Point(344, 308);
             btnSalir.Margin = new Padding(3, 2, 3, 2);
             btnSalir.Name = "btnSalir";
