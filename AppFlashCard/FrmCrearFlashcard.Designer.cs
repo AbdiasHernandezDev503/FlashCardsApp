@@ -48,7 +48,7 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.Black;
-            btnGuardar.Location = new Point(116, 308);
+            btnGuardar.Location = new Point(135, 311);
             btnGuardar.Margin = new Padding(3, 2, 3, 2);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(194, 53);
@@ -65,7 +65,7 @@
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSalir.ForeColor = Color.Black;
-            btnSalir.Location = new Point(344, 308);
+            btnSalir.Location = new Point(346, 311);
             btnSalir.Margin = new Padding(3, 2, 3, 2);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(185, 53);
@@ -91,7 +91,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(41, 137);
+            label2.Location = new Point(136, 85);
             label2.Name = "label2";
             label2.Size = new Size(70, 21);
             label2.TabIndex = 3;
@@ -102,7 +102,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(58, 192);
+            label3.Location = new Point(136, 168);
             label3.Name = "label3";
             label3.Size = new Size(53, 21);
             label3.TabIndex = 4;
@@ -139,7 +139,7 @@
             txtRespuesta.Location = new Point(629, 269);
             txtRespuesta.Margin = new Padding(3, 2, 3, 2);
             txtRespuesta.Name = "txtRespuesta";
-            txtRespuesta.Size = new Size(373, 113);
+            txtRespuesta.Size = new Size(373, 100);
             txtRespuesta.TabIndex = 7;
             txtRespuesta.Text = "";
             // 
@@ -151,7 +151,7 @@
             txtPregunta.Location = new Point(629, 111);
             txtPregunta.Margin = new Padding(3, 2, 3, 2);
             txtPregunta.Name = "txtPregunta";
-            txtPregunta.Size = new Size(373, 113);
+            txtPregunta.Size = new Size(373, 98);
             txtPregunta.TabIndex = 8;
             txtPregunta.Text = "";
             // 
@@ -160,7 +160,7 @@
             cbMaterias.BackColor = Color.FromArgb(77, 79, 117);
             cbMaterias.DropDownStyle = ComboBoxStyle.DropDownList;
             cbMaterias.FormattingEnabled = true;
-            cbMaterias.Location = new Point(136, 137);
+            cbMaterias.Location = new Point(136, 117);
             cbMaterias.Margin = new Padding(3, 2, 3, 2);
             cbMaterias.Name = "cbMaterias";
             cbMaterias.Size = new Size(393, 23);
@@ -172,7 +172,7 @@
             cbTemas.BackColor = Color.FromArgb(77, 79, 117);
             cbTemas.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTemas.FormattingEnabled = true;
-            cbTemas.Location = new Point(136, 192);
+            cbTemas.Location = new Point(136, 200);
             cbTemas.Margin = new Padding(3, 2, 3, 2);
             cbTemas.Name = "cbTemas";
             cbTemas.Size = new Size(393, 23);
@@ -182,10 +182,12 @@
             // lblContador
             // 
             lblContador.AutoSize = true;
-            lblContador.Location = new Point(58, 329);
+            lblContador.ForeColor = Color.White;
+            lblContador.Location = new Point(926, 406);
             lblContador.Name = "lblContador";
-            lblContador.Size = new Size(0, 15);
+            lblContador.Size = new Size(129, 15);
             lblContador.TabIndex = 11;
+            lblContador.Text = "0/20 flashcards creadas";
             // 
             // FrmCrearFlashcard
             // 
