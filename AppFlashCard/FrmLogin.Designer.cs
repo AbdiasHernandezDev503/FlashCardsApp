@@ -15,157 +15,187 @@
 
         private void InitializeComponent()
         {
-            //Contenedor de todos los controles
-            this.panelLogin = new System.Windows.Forms.Panel();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.picPerfil = new System.Windows.Forms.PictureBox();
-            this.table = new System.Windows.Forms.TableLayoutPanel();
-            this.picUser = new System.Windows.Forms.PictureBox();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.picLock = new System.Windows.Forms.PictureBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.chkMostrarPassword = new System.Windows.Forms.CheckBox();
-            this.btnRegistrar = new System.Windows.Forms.Button();
-            this.btnIniciarSesion = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.picDecoracion = new System.Windows.Forms.PictureBox();
-
-            ((System.ComponentModel.ISupportInitialize)(this.picPerfil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLock)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDecoracion)).BeginInit();
-
-            this.panelLogin.SuspendLayout();
-            this.table.SuspendLayout();
-            this.SuspendLayout();
-
+            panelLogin = new Panel();
+            lblTitulo = new Label();
+            picPerfil = new PictureBox();
+            table = new TableLayoutPanel();
+            picUser = new PictureBox();
+            txtUsername = new TextBox();
+            picLock = new PictureBox();
+            txtPassword = new TextBox();
+            chkMostrarPassword = new CheckBox();
+            btnRegistrar = new Button();
+            btnIniciarSesion = new Button();
+            btnSalir = new Button();
+            picDecoracion = new PictureBox();
+            panelLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picPerfil).BeginInit();
+            table.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picUser).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picLock).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picDecoracion).BeginInit();
+            SuspendLayout();
+            // 
             // panelLogin
-            this.panelLogin.Controls.Add(this.lblTitulo);
-            this.panelLogin.Controls.Add(this.picPerfil);
-            this.panelLogin.Controls.Add(this.table);
-            this.panelLogin.Controls.Add(this.chkMostrarPassword);
-            this.panelLogin.Controls.Add(this.btnRegistrar);
-            this.panelLogin.Controls.Add(this.btnIniciarSesion);
-            this.panelLogin.Controls.Add(this.btnSalir);
-            this.panelLogin.Location = new System.Drawing.Point(0, 0);
-            this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(400, 360);
-            this.panelLogin.TabIndex = 0;
-
-            // Etiqueta lblTitulo
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(120, 90);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(160, 30);
-            this.lblTitulo.Text = "Iniciar Sesión";
-            this.lblTitulo.TabIndex = 1;
-
-            // Imagen del Perfil
-            this.picPerfil.Image = System.Drawing.Image.FromFile("Images/user_login.png");
-            this.picPerfil.Location = new System.Drawing.Point(165, 10);
-            this.picPerfil.Name = "picPerfil";
-            this.picPerfil.Size = new System.Drawing.Size(70, 70);
-            this.picPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picPerfil.TabIndex = 2;
-
-            // tabla con iconos, cajas de textos usuario y contraseña 
-            this.table.ColumnCount = 2;
-            this.table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.table.Controls.Add(this.picUser, 0, 0);
-            this.table.Controls.Add(this.txtUsername, 1, 0);
-            this.table.Controls.Add(this.picLock, 0, 1);
-            this.table.Controls.Add(this.txtPassword, 1, 1);
-            this.table.Location = new System.Drawing.Point(45, 140);
-            this.table.Name = "table";
-            this.table.RowCount = 2;
-            this.table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.table.Size = new System.Drawing.Size(310, 60);
-            this.table.TabIndex = 3;
-
-            // icono de usuario 
-            this.picUser.Image = System.Drawing.Image.FromFile("Images/icon_user1.png");
-            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picUser.Size = new System.Drawing.Size(24, 24);
-            this.picUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.picUser.TabIndex = 4;
-
-            // Caja de texto de usuario 
-            this.txtUsername.PlaceholderText = "Escribe tu usuario";
-            this.txtUsername.Size = new System.Drawing.Size(200, 25);
-            this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtUsername.TabIndex = 7;
-
-            // Icono de candado
-            this.picLock.Image = System.Drawing.Image.FromFile("Images/icon_lock.png");
-            this.picLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLock.Size = new System.Drawing.Size(24, 24);
-            this.picLock.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.picLock.TabIndex = 4;
-
-            // Caja de texto de contraseña
-            this.txtPassword.PlaceholderText = "Escribe tu contraseña";
-            this.txtPassword.Size = new System.Drawing.Size(200, 27);
-            this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtPassword.TabIndex = 7;
-
-            // Checkbox mostrar/ocultar contraseña
-            this.chkMostrarPassword.AutoSize = true;
-            this.chkMostrarPassword.Location = new System.Drawing.Point(70, 205);
-            this.chkMostrarPassword.Text = "Mostrar contraseña";
-            this.chkMostrarPassword.CheckedChanged += new System.EventHandler(this.chkMostrarPassword_CheckedChanged);
-            this.chkMostrarPassword.TabIndex = 8;
-
+            // 
+            panelLogin.Controls.Add(lblTitulo);
+            panelLogin.Controls.Add(picPerfil);
+            panelLogin.Controls.Add(table);
+            panelLogin.Controls.Add(chkMostrarPassword);
+            panelLogin.Controls.Add(btnRegistrar);
+            panelLogin.Controls.Add(btnIniciarSesion);
+            panelLogin.Controls.Add(btnSalir);
+            panelLogin.Location = new Point(0, 0);
+            panelLogin.Name = "panelLogin";
+            panelLogin.Size = new Size(400, 360);
+            panelLogin.TabIndex = 0;
+            panelLogin.Paint += panelLogin_Paint;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.AutoSize = true;
+            lblTitulo.Location = new Point(120, 90);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(76, 15);
+            lblTitulo.TabIndex = 1;
+            lblTitulo.Text = "Iniciar Sesión";
+            // 
+            // picPerfil
+            // 
+            picPerfil.Location = new Point(165, 10);
+            picPerfil.Name = "picPerfil";
+            picPerfil.Size = new Size(70, 70);
+            picPerfil.SizeMode = PictureBoxSizeMode.Zoom;
+            picPerfil.TabIndex = 2;
+            picPerfil.TabStop = false;
+            // 
+            // table
+            // 
+            table.ColumnCount = 2;
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            table.Controls.Add(picUser, 0, 0);
+            table.Controls.Add(txtUsername, 1, 0);
+            table.Controls.Add(picLock, 0, 1);
+            table.Controls.Add(txtPassword, 1, 1);
+            table.Location = new Point(45, 140);
+            table.Name = "table";
+            table.RowCount = 2;
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            table.Size = new Size(310, 60);
+            table.TabIndex = 3;
+            // 
+            // picUser
+            // 
+            picUser.Anchor = AnchorStyles.Right;
+            picUser.Location = new Point(13, 3);
+            picUser.Name = "picUser";
+            picUser.Size = new Size(24, 24);
+            picUser.SizeMode = PictureBoxSizeMode.Zoom;
+            picUser.TabIndex = 4;
+            picUser.TabStop = false;
+            // 
+            // txtUsername
+            // 
+            txtUsername.Anchor = AnchorStyles.Left;
+            txtUsername.Location = new Point(43, 3);
+            txtUsername.Name = "txtUsername";
+            txtUsername.PlaceholderText = "Escribe tu usuario";
+            txtUsername.Size = new Size(200, 23);
+            txtUsername.TabIndex = 7;
+            // 
+            // picLock
+            // 
+            picLock.Anchor = AnchorStyles.Right;
+            picLock.Location = new Point(13, 33);
+            picLock.Name = "picLock";
+            picLock.Size = new Size(24, 24);
+            picLock.SizeMode = PictureBoxSizeMode.Zoom;
+            picLock.TabIndex = 4;
+            picLock.TabStop = false;
+            // 
+            // txtPassword
+            // 
+            txtPassword.Anchor = AnchorStyles.Left;
+            txtPassword.Location = new Point(43, 33);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PlaceholderText = "Escribe tu contraseña";
+            txtPassword.Size = new Size(200, 23);
+            txtPassword.TabIndex = 7;
+            txtPassword.UseSystemPasswordChar = true;
+            // 
+            // chkMostrarPassword
+            // 
+            chkMostrarPassword.AutoSize = true;
+            chkMostrarPassword.Location = new Point(70, 205);
+            chkMostrarPassword.Name = "chkMostrarPassword";
+            chkMostrarPassword.Size = new Size(128, 19);
+            chkMostrarPassword.TabIndex = 8;
+            chkMostrarPassword.Text = "Mostrar contraseña";
+            chkMostrarPassword.CheckedChanged += chkMostrarPassword_CheckedChanged;
+            // 
             // btnRegistrar
-            this.btnRegistrar.Location = new System.Drawing.Point(35, 260);
-            this.btnRegistrar.Size = new System.Drawing.Size(106, 30);
-            this.btnRegistrar.Text = "Registrarse";
-            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrar.FlatAppearance.BorderSize = 0;
-            this.btnRegistrar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnRegistrar_MouseClick);
-            this.btnRegistrar.TabIndex = 9;
-
+            // 
+            btnRegistrar.FlatAppearance.BorderSize = 0;
+            btnRegistrar.FlatStyle = FlatStyle.Flat;
+            btnRegistrar.Location = new Point(35, 260);
+            btnRegistrar.Name = "btnRegistrar";
+            btnRegistrar.Size = new Size(106, 30);
+            btnRegistrar.TabIndex = 9;
+            btnRegistrar.Text = "Registrarse";
+            btnRegistrar.MouseClick += btnRegistrar_MouseClick;
+            // 
             // btnIniciarSesion
-            this.btnIniciarSesion.Location = new System.Drawing.Point(155, 260);
-            this.btnIniciarSesion.Size = new System.Drawing.Size(105, 30);
-            this.btnIniciarSesion.Text = "Iniciar sesión";
-            this.btnIniciarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciarSesion.FlatAppearance.BorderSize = 0;
-            this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
-            this.btnIniciarSesion.TabIndex = 10;
-
+            // 
+            btnIniciarSesion.FlatAppearance.BorderSize = 0;
+            btnIniciarSesion.FlatStyle = FlatStyle.Flat;
+            btnIniciarSesion.Location = new Point(155, 260);
+            btnIniciarSesion.Name = "btnIniciarSesion";
+            btnIniciarSesion.Size = new Size(105, 30);
+            btnIniciarSesion.TabIndex = 10;
+            btnIniciarSesion.Text = "Iniciar sesión";
+            btnIniciarSesion.Click += btnIniciarSesion_Click;
+            // 
             // btnSalir
-            this.btnSalir.Location = new System.Drawing.Point(275, 260);
-            this.btnSalir.Size = new System.Drawing.Size(70, 30);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalir.FlatAppearance.BorderSize = 0;
-            this.btnSalir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnSalir_MouseClick);
-            this.btnSalir.TabIndex = 11;
-
-
-            // Propiedades de FrmLogin
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 600);
-            this.Controls.Add(this.picDecoracion);
-            this.Controls.Add(this.panelLogin);
-            this.Name = "FrmLogin";
-            this.Text = "Inicio de Sesión";
-            this.Resize += new System.EventHandler(this.FrmLogin_Resize);
-            this.Load += new System.EventHandler(this.FrmLogin_Load);
-
-            // Libera recursos utilizados por PictureBox y Panel
-            ((System.ComponentModel.ISupportInitialize)(this.picPerfil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLock)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDecoracion)).EndInit();
-            this.panelLogin.ResumeLayout(false);
-            this.panelLogin.PerformLayout(); // Aplica diseño de los controles contenidos
-            this.table.ResumeLayout(false);
-            this.table.PerformLayout();
-            this.ResumeLayout(false);
+            // 
+            btnSalir.FlatAppearance.BorderSize = 0;
+            btnSalir.FlatStyle = FlatStyle.Flat;
+            btnSalir.Location = new Point(275, 260);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(70, 30);
+            btnSalir.TabIndex = 11;
+            btnSalir.Text = "Salir";
+            btnSalir.MouseClick += btnSalir_MouseClick;
+            // 
+            // picDecoracion
+            // 
+            picDecoracion.Location = new Point(0, 0);
+            picDecoracion.Name = "picDecoracion";
+            picDecoracion.Size = new Size(100, 50);
+            picDecoracion.TabIndex = 0;
+            picDecoracion.TabStop = false;
+            // 
+            // FrmLogin
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1000, 600);
+            Controls.Add(picDecoracion);
+            Controls.Add(panelLogin);
+            Name = "FrmLogin";
+            Text = "Inicio de Sesión";
+            Load += FrmLogin_Load;
+            Resize += FrmLogin_Resize;
+            panelLogin.ResumeLayout(false);
+            panelLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picPerfil).EndInit();
+            table.ResumeLayout(false);
+            table.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picUser).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picLock).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picDecoracion).EndInit();
+            ResumeLayout(false);
         }
 
         private System.Windows.Forms.Panel panelLogin;

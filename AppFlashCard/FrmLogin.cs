@@ -180,7 +180,7 @@ namespace AppFlashCard
         {
             targetLeft = (this.ClientSize.Width - panelLogin.Width) / 2;
             panelLogin.Top = (this.ClientSize.Height - panelLogin.Height) / 2;
-             CentrarPanelLogin();
+            CentrarPanelLogin();
         }
 
         private void btnSalir_MouseClick(object sender, MouseEventArgs e)
@@ -194,7 +194,7 @@ namespace AppFlashCard
             panelLogin.Top = (this.ClientSize.Height - panelLogin.Height) / 2;
         }
 
-        
+
 
         private async void btnIniciarSesion_Click(object sender, EventArgs e)
         {
@@ -224,6 +224,11 @@ namespace AppFlashCard
             {
                 MessageBox.Show("Error al iniciar sesión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void panelLogin_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

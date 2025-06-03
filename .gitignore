@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AppFlashCard/App.config
+/AppFlashCard
+/AppFlashCard
+/AppFlashCard
+AppFlashCard/Program.cs
