@@ -22,6 +22,11 @@ namespace AppFlashCard
         private Font ralewayRegular;
         private Font ralewaySemiBold;
 
+        private void picVerPassword_Click(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !txtPassword.UseSystemPasswordChar;
+        }
+
         public FrmRegistro()
         {
             InitializeComponent();

@@ -146,10 +146,7 @@ namespace AppFlashCard
             this.picVerPassword.Image = Image.FromFile("Images/view.png");
             this.picVerPassword.BackColor = Color.White;
             this.picVerPassword.Cursor = Cursors.Hand;
-            this.picVerPassword.Click += (s, e) =>
-            {
-                txtPassword.UseSystemPasswordChar = !txtPassword.UseSystemPasswordChar;
-            };
+            this.picVerPassword.Click += new System.EventHandler(this.picVerPassword_Click);
             this.panelRegistro.Controls.Add(this.picVerPassword);
             this.picVerPassword.BringToFront();
 
@@ -174,10 +171,7 @@ namespace AppFlashCard
             this.picVerConfirmPassword.Image = Image.FromFile("Images/view.png");
             this.picVerConfirmPassword.BackColor = Color.White;
             this.picVerConfirmPassword.Cursor = Cursors.Hand;
-            this.picVerConfirmPassword.Click += (s, e) =>
-            {
-                txtConfirmPassword.UseSystemPasswordChar = !txtConfirmPassword.UseSystemPasswordChar;
-            };
+            this.picVerPassword.Click += new System.EventHandler(this.picVerPassword_Click);
             this.panelRegistro.Controls.Add(this.picVerConfirmPassword);
             this.picVerConfirmPassword.BringToFront();
 
