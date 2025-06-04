@@ -225,11 +225,6 @@ namespace AppFlashCard
                 MessageBox.Show("Error al iniciar sesión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void panelLogin_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
 

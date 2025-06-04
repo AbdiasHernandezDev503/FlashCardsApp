@@ -87,6 +87,10 @@ namespace AppFlashCard
         {
             panelRegistro.Left = (this.ClientSize.Width - panelRegistro.Width) / 2;
             panelRegistro.Top = (this.ClientSize.Height - panelRegistro.Height) / 2;
+            // Ajustar posición de los iconos "ver contraseña" al redimensionar
+            picVerPassword.Location = new Point(txtPassword.Left + txtPassword.Width - 25, txtPassword.Top + 4);
+            picVerConfirmPassword.Location = new Point(txtConfirmPassword.Left + txtConfirmPassword.Width - 25, txtConfirmPassword.Top + 4);
+
         }
 
         private void CargarFuenteRaleway()
@@ -167,6 +171,11 @@ namespace AppFlashCard
             new FrmLogin().Show();
         }
 
+        private void picVerConfirmPassword_Click(object sender, EventArgs e)
+        {
+            txtConfirmPassword.UseSystemPasswordChar = !txtConfirmPassword.UseSystemPasswordChar;
+        }
+
         private async void btnResgistrar_Click(object sender, EventArgs e) // Registrar nuevo usuario
         {
             Usuario nuevoUsuario = new Usuario
@@ -195,6 +204,8 @@ namespace AppFlashCard
             {
                 MessageBox.Show("Error: " + mensaje);
             }
+
+
         }
     }
 }

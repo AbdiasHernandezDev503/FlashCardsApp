@@ -14,6 +14,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AppFlashCard.EL.DTOs;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Drawing.Text;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Drawing.Drawing2D;
 
 namespace AppFlashCard
 {
@@ -32,16 +36,72 @@ namespace AppFlashCard
         int animationDirection = 0; // 1 = derecha, -1 = izquierda
         private bool esperandoReinicio = false;
 
+        //Fuentes que utilizamos 
+        PrivateFontCollection fuentesPersonalizadas = new PrivateFontCollection();
+        Font ralewayRegular;
+        Font ralewaySemiBold;
+
         public FrmEstudiar()
         {
             InitializeComponent();
             _connectionString = ConfigurationManager.ConnectionStrings["FlashcardsDB"].ConnectionString;
             _materiaDAL = new MateriaDAL(_connectionString);
             _flashcardDAL = new FlashcardDAL(_connectionString);
+            CargarFuenteRaleway();
+            this.Resize += FrmEstudiar_Resize;
+        }
+
+        //Fuentes 
+        private void CargarFuenteRaleway()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            void CargarTTF(string resourceName)
+            {
+                Stream stream = assembly.GetManifestResourceStream(resourceName);
+                if (stream == null)
+                {
+                    MessageBox.Show($"No se encontró el recurso embebido:\n{resourceName}", "Error al cargar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                byte[] fontData = new byte[stream.Length];
+                stream.Read(fontData, 0, (int)stream.Length);
+
+                IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
+                Marshal.Copy(fontData, 0, data, fontData.Length);
+                fuentesPersonalizadas.AddMemoryFont(data, fontData.Length);
+            }
+
+            CargarTTF("AppFlashCard.Fonts.Raleway-Regular.ttf");
+            CargarTTF("AppFlashCard.Fonts.Raleway-SemiBold.ttf");
+
+            ralewayRegular = new Font(fuentesPersonalizadas.Families[0], 12f, FontStyle.Regular);
+            ralewaySemiBold = new Font(
+                fuentesPersonalizadas.Families.Length > 1
+                    ? fuentesPersonalizadas.Families[1]
+                    : fuentesPersonalizadas.Families[0],
+                12f, FontStyle.Bold);
+        }
+
+        private Region CrearRegionRedondeada(Rectangle bounds, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.StartFigure();
+            path.AddArc(bounds.X, bounds.Y, radio, radio, 180, 90);
+            path.AddArc(bounds.Right - radio, bounds.Y, radio, radio, 270, 90);
+            path.AddArc(bounds.Right - radio, bounds.Bottom - radio, radio, radio, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - radio, radio, radio, 90, 90);
+            path.CloseFigure();
+            return new Region(path);
         }
 
         private async void FrmEstudiar_Load(object sender, EventArgs e)
         {
+            this.BackColor = ColorTranslator.FromHtml("#2D3250");
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             if (SesionActiva.Usuario == null)
             {
                 MessageBox.Show("Sesión no válida. Por favor inicia sesión.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -70,7 +130,7 @@ namespace AppFlashCard
             //    new InfoTemaFlashcard { Materia = "Inglés", Tema = "Vocabulario básico", Usuario = "Elena" },
             //    new InfoTemaFlashcard { Materia = "Programación", Tema = "Estructuras de datos usando un lenguaje de programacion en C# como lengujae", Usuario = "José" }
             //};
-
+            
             GenerarCards();
             MostrarCards();
 
@@ -140,7 +200,89 @@ namespace AppFlashCard
                 verTodasMateriasItem.Click += VerTodasMaterias_Click;
                 menuEstudiar.Items.Add(verTodasMateriasItem);
             }
+
+            // Aplicar paleta de colores armoniosa
+            this.BackColor = ColorTranslator.FromHtml("#424769");
+            panelSlider.BackColor = ColorTranslator.FromHtml("#424769");
+
+            // Menú superior
+            menuEstudiar.BackColor = ColorTranslator.FromHtml("#f9b17a");
+            menuEstudiar.ForeColor = Color.White;
+            menuEstudiar.Renderer = new ToolStripProfessionalRenderer(new ColorTablePersonalizado());
+
+            foreach (ToolStripMenuItem item in menuEstudiar.Items)
+            {
+                item.ForeColor = Color.White;
+                item.BackColor = ColorTranslator.FromHtml("#f9b17a");
+                item.Font = ralewaySemiBold;
+
+                foreach (ToolStripItem subItem in item.DropDownItems)
+                {
+                    subItem.ForeColor = ColorTranslator.FromHtml("#f9b17a");
+                    subItem.BackColor = ColorTranslator.FromHtml("#2d3250");
+                    subItem.Font = ralewayRegular;
+                }
+            }
+
+            // Estilo para el título
+            label1.Font = new Font(ralewaySemiBold.FontFamily, 14f, FontStyle.Bold);
+            label1.ForeColor = ColorTranslator.FromHtml("#ffffff");
+            label1.BackColor = Color.Transparent;
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.AutoSize = true; 
+            label1.Left = (this.ClientSize.Width - label1.Width) / 2;
+
+            // Botones
+            btnIzquierda.Font = ralewaySemiBold;
+            btnDerecha.Font = ralewaySemiBold;
+            btnSalir.Font = ralewaySemiBold;
+
+            btnIzquierda.ForeColor = Color.White;
+            btnDerecha.ForeColor = Color.White;
+            btnSalir.ForeColor = Color.White;
+
+            btnIzquierda.BackColor = ColorTranslator.FromHtml("#b76f9d");
+            btnDerecha.BackColor = ColorTranslator.FromHtml("#f9b17a");
+            btnSalir.BackColor = ColorTranslator.FromHtml("#2d3250");
+
+            btnIzquierda.FlatStyle = FlatStyle.Flat;
+            btnDerecha.FlatStyle = FlatStyle.Flat;
+            btnSalir.FlatStyle = FlatStyle.Flat;
+
+            btnIzquierda.FlatAppearance.BorderSize = 0;
+            btnDerecha.FlatAppearance.BorderSize = 0;
+            btnSalir.FlatAppearance.BorderSize = 0;
+
+            btnIzquierda.Region = CrearRegionRedondeada(btnIzquierda.ClientRectangle, 14);
+            btnDerecha.Region = CrearRegionRedondeada(btnDerecha.ClientRectangle, 14);
+            btnSalir.Region = CrearRegionRedondeada(btnSalir.ClientRectangle, 14);
+
+            // Estilo del botón Salir
+            btnSalir.Font = ralewaySemiBold;
+            btnSalir.ForeColor = Color.White;
+            btnSalir.BackColor = ColorTranslator.FromHtml("#2d3250");
+            btnSalir.FlatStyle = FlatStyle.Flat;   
+            btnSalir.Region = CrearRegionRedondeada(btnSalir.ClientRectangle, 13);
+
+            // Centrado vertical 
+            btnSalir.Top = this.ClientSize.Height - btnSalir.Height - 40;
+
+            // Alinear a la derecha
+            btnSalir.Left = this.ClientSize.Width - btnSalir.Width - 40;
+
+
+
         }
+
+        private void FrmEstudiar_Resize(object sender, EventArgs e)
+        {
+            label1.AutoSize = true;
+            label1.Left = (this.ClientSize.Width - label1.Width) / 2;
+            // Mantener el botón alineado a la derecha en tiempo real
+            btnSalir.Left = this.ClientSize.Width - btnSalir.Width - 40;
+
+        }
+
 
         private void GenerarCards()
         {
@@ -363,5 +505,22 @@ namespace AppFlashCard
             animationDirection = -1;
             animTimer.Start();
         }
+        public class ColorTablePersonalizado : ProfessionalColorTable
+        {
+            public override Color MenuItemSelected => ColorTranslator.FromHtml("#424769");
+            public override Color MenuItemSelectedGradientBegin => ColorTranslator.FromHtml("#424769");
+            public override Color MenuItemSelectedGradientEnd => ColorTranslator.FromHtml("#424769");
+            public override Color MenuItemBorder => ColorTranslator.FromHtml("#424769");
+
+            public override Color ToolStripDropDownBackground => ColorTranslator.FromHtml("#2d3250");
+            public override Color ImageMarginGradientBegin => ColorTranslator.FromHtml("#2d3250");
+            public override Color ImageMarginGradientMiddle => ColorTranslator.FromHtml("#2d3250");
+            public override Color ImageMarginGradientEnd => ColorTranslator.FromHtml("#2d3250");
+
+            public override Color MenuItemPressedGradientBegin => ColorTranslator.FromHtml("#424769");
+            public override Color MenuItemPressedGradientEnd => ColorTranslator.FromHtml("#424769");
+        }
+
+
     }
 }
