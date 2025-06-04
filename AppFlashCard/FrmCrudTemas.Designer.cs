@@ -106,18 +106,19 @@
             // dgvTemas
             // 
             dgvTemas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTemas.Location = new Point(276, 31);
+            dgvTemas.Location = new Point(261, 31);
             dgvTemas.Name = "dgvTemas";
+            dgvTemas.ReadOnly = true;
             dgvTemas.RowTemplate.Height = 25;
-            dgvTemas.Size = new Size(240, 224);
+            dgvTemas.Size = new Size(407, 212);
             dgvTemas.TabIndex = 7;
-            dgvTemas.CellContentClick += dgvTemas_CellContentClick;
+            dgvTemas.CellContentClick += dgvTemas_CellContentClick_1;
             // 
             // FrmCrudTemas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(526, 274);
+            ClientSize = new Size(680, 277);
             Controls.Add(dgvTemas);
             Controls.Add(btnSalir);
             Controls.Add(btnGuardar);
