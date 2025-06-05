@@ -176,8 +176,57 @@ namespace AppFlashCard
             txtConfirmPassword.UseSystemPasswordChar = !txtConfirmPassword.UseSystemPasswordChar;
         }
 
-        private async void btnResgistrar_Click(object sender, EventArgs e) // Registrar nuevo usuario
+        private async void btnResgistrar_Click(object sender, EventArgs e)
         {
+            //  Verificar campos obligatorios
+            if (string.IsNullOrWhiteSpace(txtNombres.Text) ||
+                string.IsNullOrWhiteSpace(txtApellidos.Text) ||
+                string.IsNullOrWhiteSpace(txtCorreo.Text) ||
+                string.IsNullOrWhiteSpace(txtTelefono.Text) ||
+                string.IsNullOrWhiteSpace(txtUsername.Text) ||
+                string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+            {
+                MessageBox.Show(
+                    "Por favor, complete todos los campos obligatorios.",
+                    "Campos vacíos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            // Validar que contraseña y confirmación coincidan
+            if (txtPassword.Text != txtConfirmPassword.Text)
+            {
+                MessageBox.Show(
+                    "Las contraseñas no coinciden.",
+                    "Error en contraseña",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            // Validar formato básico de e-mail
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(txtCorreo.Text.Trim());
+                if (addr.Address != txtCorreo.Text.Trim())
+                    throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "El correo ingresado no tiene un formato válido.",
+                    "Email inválido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            //  (Carnet es opcional)
             Usuario nuevoUsuario = new Usuario
             {
                 Nombres = txtNombres.Text.Trim(),
@@ -186,10 +235,13 @@ namespace AppFlashCard
                 Clave = txtPassword.Text,
                 Correo = txtCorreo.Text.Trim(),
                 Telefono = txtTelefono.Text.Trim(),
-                CarnetEstudiante = string.IsNullOrWhiteSpace(txtCarnet.Text) ? null : txtCarnet.Text.Trim(),
+                CarnetEstudiante = string.IsNullOrWhiteSpace(txtCarnet.Text)
+                                   ? null
+                                   : txtCarnet.Text.Trim(),
                 FechaNacimiento = dtpFechaNacimiento.Value.Date
             };
 
+            // Deshabilitar botón mientras se procesa
             btnResgistrar.Enabled = false;
             var (exito, mensaje) = await _usuarioDAL.RegistrarUsuarioAsync(nuevoUsuario);
             btnResgistrar.Enabled = true;
@@ -204,8 +256,6 @@ namespace AppFlashCard
             {
                 MessageBox.Show("Error: " + mensaje);
             }
-
-
         }
     }
 }

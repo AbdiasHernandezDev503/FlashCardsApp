@@ -19,7 +19,6 @@
             lblBienvenida = new Label();
             btnEstudiar = new Button();
             btnCrearFlashcards = new Button();
-            btnMiUsuario = new Button();
             btnCerrarSesion = new Button();
             panelMain.SuspendLayout();
             SuspendLayout();
@@ -30,13 +29,11 @@
             panelMain.Controls.Add(lblBienvenida);
             panelMain.Controls.Add(btnEstudiar);
             panelMain.Controls.Add(btnCrearFlashcards);
-            panelMain.Controls.Add(btnMiUsuario);
             panelMain.Controls.Add(btnCerrarSesion);
             panelMain.Dock = DockStyle.Fill;
             panelMain.Location = new Point(0, 0);
-            panelMain.Margin = new Padding(2, 2, 2, 2);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(520, 337);
+            panelMain.Size = new Size(743, 562);
             panelMain.TabIndex = 0;
             // 
             // lblBienvenida
@@ -44,10 +41,9 @@
             lblBienvenida.AutoSize = true;
             lblBienvenida.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lblBienvenida.ForeColor = Color.White;
-            lblBienvenida.Location = new Point(85, 38);
-            lblBienvenida.Margin = new Padding(2, 0, 2, 0);
+            lblBienvenida.Location = new Point(190, 79);
             lblBienvenida.Name = "lblBienvenida";
-            lblBienvenida.Size = new Size(223, 30);
+            lblBienvenida.Size = new Size(326, 45);
             lblBienvenida.TabIndex = 0;
             lblBienvenida.Text = "Bienvenido/a al App";
             lblBienvenida.TextAlign = ContentAlignment.MiddleCenter;
@@ -60,10 +56,9 @@
             btnEstudiar.FlatStyle = FlatStyle.Flat;
             btnEstudiar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnEstudiar.ForeColor = Color.White;
-            btnEstudiar.Location = new Point(166, 103);
-            btnEstudiar.Margin = new Padding(2, 2, 2, 2);
+            btnEstudiar.Location = new Point(390, 212);
             btnEstudiar.Name = "btnEstudiar";
-            btnEstudiar.Size = new Size(148, 30);
+            btnEstudiar.Size = new Size(211, 50);
             btnEstudiar.TabIndex = 1;
             btnEstudiar.Text = "Estudiar Flashcards";
             btnEstudiar.UseVisualStyleBackColor = false;
@@ -76,30 +71,13 @@
             btnCrearFlashcards.FlatStyle = FlatStyle.Flat;
             btnCrearFlashcards.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnCrearFlashcards.ForeColor = Color.White;
-            btnCrearFlashcards.Location = new Point(166, 148);
-            btnCrearFlashcards.Margin = new Padding(2, 2, 2, 2);
+            btnCrearFlashcards.Location = new Point(121, 212);
             btnCrearFlashcards.Name = "btnCrearFlashcards";
-            btnCrearFlashcards.Size = new Size(148, 30);
+            btnCrearFlashcards.Size = new Size(211, 50);
             btnCrearFlashcards.TabIndex = 2;
             btnCrearFlashcards.Text = "Crear Flashcards";
             btnCrearFlashcards.UseVisualStyleBackColor = true;
             btnCrearFlashcards.Click += btnCrearFlashcards_Click;
-            // 
-            // btnMiUsuario
-            // 
-            btnMiUsuario.BackColor = Color.FromArgb(70, 71, 105);
-            btnMiUsuario.FlatAppearance.BorderSize = 0;
-            btnMiUsuario.FlatStyle = FlatStyle.Flat;
-            btnMiUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnMiUsuario.ForeColor = Color.White;
-            btnMiUsuario.Location = new Point(166, 200);
-            btnMiUsuario.Margin = new Padding(2, 2, 2, 2);
-            btnMiUsuario.Name = "btnMiUsuario";
-            btnMiUsuario.Size = new Size(148, 30);
-            btnMiUsuario.TabIndex = 3;
-            btnMiUsuario.Text = "Mi Usuario";
-            btnMiUsuario.UseVisualStyleBackColor = true;
-            btnMiUsuario.Click += btnMiUsuario_Click;
             // 
             // btnCerrarSesion
             // 
@@ -108,10 +86,9 @@
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
             btnCerrarSesion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnCerrarSesion.ForeColor = Color.White;
-            btnCerrarSesion.Location = new Point(166, 256);
-            btnCerrarSesion.Margin = new Padding(2, 2, 2, 2);
+            btnCerrarSesion.Location = new Point(252, 378);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(148, 30);
+            btnCerrarSesion.Size = new Size(211, 50);
             btnCerrarSesion.TabIndex = 4;
             btnCerrarSesion.Text = "Cerrar Sesión";
             btnCerrarSesion.UseVisualStyleBackColor = true;
@@ -119,11 +96,10 @@
             // 
             // MenuPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(520, 337);
+            ClientSize = new Size(743, 562);
             Controls.Add(panelMain);
-            Margin = new Padding(2, 2, 2, 2);
             Name = "MenuPrincipal";
             Text = "Menú Principal";
             Load += MenuPrincipal_Load;
@@ -136,7 +112,6 @@
         private Label lblBienvenida;
         private Button btnEstudiar;
         private Button btnCrearFlashcards;
-        private Button btnMiUsuario;
         private Button btnCerrarSesion;
     }
 }

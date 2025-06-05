@@ -16,7 +16,7 @@ namespace AppFlashCard
 
         // Cadena de conexión: Colocar servidor
         private string cadenaConexion =
-            "Server=DESKTOP-L2CUOSF\\MSSQLSERVER01;Database=FlashcardsDB;Trusted_Connection=True;TrustServerCertificate=True;";
+            "Data Source=KIKE-PC\\SQLEXPRESS;Initial Catalog=FlashcardsDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;";
 
         // ID de la materia seleccionada (0 = insertar; >0 = editar)
         private int idMateriaSeleccionada = 0;
