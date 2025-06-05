@@ -7,6 +7,19 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        private Button btnGuardar;
+        private Button btnSalir;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private RichTextBox txtRespuesta;
+        private RichTextBox txtPregunta;
+        private ComboBox cbMaterias;
+        private ComboBox cbTemas;
+        private Label lblContador;
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -23,7 +36,7 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
+        /// Required method for Designer support — do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -84,7 +97,6 @@
             label1.Size = new Size(302, 32);
             label1.TabIndex = 2;
             label1.Text = "Crear FlashCards de estudio";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -118,7 +130,6 @@
             label4.Size = new Size(76, 21);
             label4.TabIndex = 5;
             label4.Text = "Pregunta:";
-            label4.Click += label4_Click;
             // 
             // label5
             // 
@@ -216,18 +227,6 @@
         }
 
         #endregion
-
-        private Button btnGuardar;
-        private Button btnSalir;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private RichTextBox txtRespuesta;
-        private RichTextBox txtPregunta;
-        private ComboBox cbMaterias;
-        private ComboBox cbTemas;
-        private Label lblContador;
     }
 }
+

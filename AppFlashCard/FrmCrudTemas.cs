@@ -82,7 +82,6 @@ namespace AppFlashCard
                 }
             }
 
-            // Asegúrate de que en tu proyecto, los archivos .ttf estén marcados como "Recurso incrustado"
             CargarTTF("AppFlashCard.Fonts.Raleway-Regular.ttf");
             CargarTTF("AppFlashCard.Fonts.Raleway-SemiBold.ttf");
 
@@ -182,7 +181,7 @@ namespace AppFlashCard
                     | AnchorStyles.Left
                     | AnchorStyles.Right;
 
-            // 6) Configuración del DataGridView
+            // Configuración del DataGridView
             dgvTemas.ReadOnly = true;
             dgvTemas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTemas.AllowUserToAddRows = false;
@@ -205,7 +204,7 @@ namespace AppFlashCard
             dgvTemas.EnableHeadersVisualStyles = false;
 
 
-            // 7) Cargar datos en combo y grilla
+            //  Cargar datos en combo y grilla
             CargarMateriasEnCombo();
             CargarTemas();
         }
@@ -213,7 +212,7 @@ namespace AppFlashCard
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)

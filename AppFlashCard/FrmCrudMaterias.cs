@@ -30,8 +30,6 @@ namespace AppFlashCard
         {
             InitializeComponent();
 
-
-            // Evito que el Form sea más pequeño de 600x350
             this.MinimumSize = new Size(600 + (this.Width - this.ClientSize.Width),
                             350 + (this.Height - this.ClientSize.Height));
 
@@ -149,8 +147,8 @@ namespace AppFlashCard
 
             panelContenedor = new Panel
             {
-                Location = new Point(300, 20),      // Coincide con el borde negro
-                Size = new Size(260, 360),      // Coincide con el borde negro
+                Location = new Point(300, 20),     
+                Size = new Size(260, 360),      
                 BorderStyle = BorderStyle.None  
             };
             this.Controls.Add(panelContenedor);
@@ -295,7 +293,7 @@ namespace AppFlashCard
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close(); //ultima modificacion
         }
 
         private void dgvMaterias_CellContentClick(object sender, DataGridViewCellEventArgs e)

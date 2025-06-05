@@ -1,23 +1,17 @@
-﻿using AppFlashCard.DAL;
-using AppFlashCard.EL;
+﻿using AppFlashCard.EL;
 using AppFlashCard.Utils;
 using System.Configuration;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using AppFlashCard.EL.DTOs;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Drawing.Drawing2D;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using AppFlashCard.EL.DTOs;
+using AppFlashCard.DAL;
 
 namespace AppFlashCard
 {
@@ -27,16 +21,19 @@ namespace AppFlashCard
         private readonly MateriaDAL _materiaDAL;
         private readonly FlashcardDAL _flashcardDAL;
 
-        List<InfoTemaFlashcard> datos = new(); // Lista de datos a  de ejemplo hasta conectar con la DAL
+        List<InfoTemaFlashcard> datos = new();
         List<Panel> cards = new();
         int currentIndex = 0;
         int cardsVisible = 3;
         int animationStep = 20;
         int animationOffset = 0;
-        int animationDirection = 0; // 1 = derecha, -1 = izquierda
+        int animationDirection = 0;
         private bool esperandoReinicio = false;
 
-        //Fuentes que utilizamos 
+        // Referencia al ítem “Personalizar…”
+        private ToolStripMenuItem _itemPersonalizar;
+
+        // Fuentes que utilizamos 
         PrivateFontCollection fuentesPersonalizadas = new PrivateFontCollection();
         Font ralewayRegular;
         Font ralewaySemiBold;
@@ -47,11 +44,14 @@ namespace AppFlashCard
             _connectionString = ConfigurationManager.ConnectionStrings["FlashcardsDB"].ConnectionString;
             _materiaDAL = new MateriaDAL(_connectionString);
             _flashcardDAL = new FlashcardDAL(_connectionString);
+
             CargarFuenteRaleway();
+
             this.Resize += FrmEstudiar_Resize;
+
         }
 
-        //Fuentes 
+        // Fuentes 
         private void CargarFuenteRaleway()
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -61,7 +61,10 @@ namespace AppFlashCard
                 Stream stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream == null)
                 {
-                    MessageBox.Show($"No se encontró el recurso embebido:\n{resourceName}", "Error al cargar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"No se encontró el recurso embebido:\n{resourceName}",
+                                    "Error al cargar fuente",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
                     return;
                 }
 
@@ -96,6 +99,7 @@ namespace AppFlashCard
             return new Region(path);
         }
 
+      
         private async void FrmEstudiar_Load(object sender, EventArgs e)
         {
             this.BackColor = ColorTranslator.FromHtml("#2D3250");
@@ -104,33 +108,20 @@ namespace AppFlashCard
 
             if (SesionActiva.Usuario == null)
             {
-                MessageBox.Show("Sesión no válida. Por favor inicia sesión.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Sesión no válida. Por favor inicia sesión.",
+                                "Acceso denegado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
 
                 this.Hide();
                 FrmLogin login = new FrmLogin();
                 login.Show();
-
-                this.Close(); // Cierra el acceso no autorizado
+                this.Close();
                 return;
             }
 
+            //  Cargar las flashcards y mostrar el slider
             datos = await _flashcardDAL.ObtenerInfoTemaFlashcardsAsync();
-
-            // Datos para probar
-            //datos = new List<InfoTemaFlashcard>
-            //{
-            //    new InfoTemaFlashcard { Materia = "Matemática", Tema = "Cálculo Diferencial: Derivadas", Usuario = "Juan" },
-            //    new InfoTemaFlashcard { Materia = "Historia", Tema = "Edad Media", Usuario = "Ana" },
-            //    new InfoTemaFlashcard { Materia = "Ciencias", Tema = "Física Básica", Usuario = "Pedro" },
-            //    new InfoTemaFlashcard { Materia = "Inglés", Tema = "Tiempos Verbales", Usuario = "Laura" },
-            //    new InfoTemaFlashcard { Materia = "Programación", Tema = "POO en C#", Usuario = "Sofía" },
-            //    new InfoTemaFlashcard { Materia = "Matemática", Tema = "Álgebra Lineal", Usuario = "Carlos" },
-            //    new InfoTemaFlashcard { Materia = "Historia", Tema = "Revolución Francesa", Usuario = "Luis" },
-            //    new InfoTemaFlashcard { Materia = "Ciencias", Tema = "Biología Celular", Usuario = "María" },
-            //    new InfoTemaFlashcard { Materia = "Inglés", Tema = "Vocabulario básico", Usuario = "Elena" },
-            //    new InfoTemaFlashcard { Materia = "Programación", Tema = "Estructuras de datos usando un lenguaje de programacion en C# como lengujae", Usuario = "José" }
-            //};
-            
             GenerarCards();
             MostrarCards();
 
@@ -147,61 +138,10 @@ namespace AppFlashCard
                 btnDerecha.Visible = true;
             }
 
-            var listaMaterias = await _materiaDAL.ObtenerMateriasConTemasAsync();
-            menuEstudiar.Items.Clear();
+            // Cargar el menú de materias (con sus temas) 
+            await CargarMenuMateriasAsync();
 
-            int maximoTemas = 5;
-            int maximoMaterias = 7;
-            int contadorMaterias = 0;
-
-            foreach (var materia in listaMaterias)
-            {
-                if (contadorMaterias >= maximoMaterias)
-                    break;
-
-                var materiaItem = new ToolStripMenuItem(materia.Nombre);
-                int contadorTemas = 0;
-
-                foreach (var tema in materia.Temas)
-                {
-                    if (contadorTemas >= maximoTemas)
-                        break;
-
-                    var temaItem = new ToolStripMenuItem(tema.Nombre)
-                    {
-                        Tag = tema
-                    };
-                    temaItem.Click += TemaItem_Click;
-
-                    materiaItem.DropDownItems.Add(temaItem);
-                    contadorTemas++;
-                }
-
-                if (materia.Temas.Count > maximoTemas)
-                { 
-                    var verTodosTemasItem = new ToolStripMenuItem("Ver Todos")
-                    {
-                        Tag = materia
-                    };
-                    verTodosTemasItem.Click += VerTodosTemas_Click;
-                    materiaItem.DropDownItems.Add(verTodosTemasItem);
-                }
-
-                menuEstudiar.Items.Add(materiaItem);
-                contadorMaterias++;
-            }
-
-            if (listaMaterias.Count > maximoMaterias)
-            {
-                var verTodasMateriasItem = new ToolStripMenuItem("Ver Todas las Materias")
-                {
-                    Tag = listaMaterias
-                };
-                verTodasMateriasItem.Click += VerTodasMaterias_Click;
-                menuEstudiar.Items.Add(verTodasMateriasItem);
-            }
-
-            // Aplicar paleta de colores armoniosa
+            // 4) Configuración de estilos (colores, tipografías, botones, etc.)
             this.BackColor = ColorTranslator.FromHtml("#424769");
             panelSlider.BackColor = ColorTranslator.FromHtml("#424769");
 
@@ -229,7 +169,7 @@ namespace AppFlashCard
             label1.ForeColor = ColorTranslator.FromHtml("#ffffff");
             label1.BackColor = Color.Transparent;
             label1.TextAlign = ContentAlignment.MiddleCenter;
-            label1.AutoSize = true; 
+            label1.AutoSize = true;
             label1.Left = (this.ClientSize.Width - label1.Width) / 2;
 
             // Botones
@@ -257,21 +197,110 @@ namespace AppFlashCard
             btnDerecha.Region = CrearRegionRedondeada(btnDerecha.ClientRectangle, 14);
             btnSalir.Region = CrearRegionRedondeada(btnSalir.ClientRectangle, 14);
 
-            // Estilo del botón Salir
+            // Estilo para el botón Salir
             btnSalir.Font = ralewaySemiBold;
             btnSalir.ForeColor = Color.White;
             btnSalir.BackColor = ColorTranslator.FromHtml("#2d3250");
-            btnSalir.FlatStyle = FlatStyle.Flat;   
+            btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Region = CrearRegionRedondeada(btnSalir.ClientRectangle, 13);
 
-            // Centrado vertical 
+            // Centrado vertical y alineación a la derecha
             btnSalir.Top = this.ClientSize.Height - btnSalir.Height - 40;
-
-            // Alinear a la derecha
             btnSalir.Left = this.ClientSize.Width - btnSalir.Width - 40;
+        }
 
+        private async Task CargarMenuMateriasAsync()
+        {
+            // Limpiar todos los ítems actuales
+            menuEstudiar.Items.Clear();
 
+            // Traer todas las materias con sus temas desde la DAL
+            var listaMaterias = await _materiaDAL.ObtenerMateriasConTemasAsync();
 
+            int maximoTemas = 5;
+            int maximoMaterias = 7;
+            int contadorMaterias = 0;
+
+           
+            foreach (var materia in listaMaterias)
+            {
+                if (contadorMaterias >= maximoMaterias)
+                    break;
+
+                var materiaItem = new ToolStripMenuItem(materia.Nombre);
+                int contadorTemas = 0;
+
+                foreach (var tema in materia.Temas)
+                {
+                    if (contadorTemas >= maximoTemas)
+                        break;
+
+                    var temaItem = new ToolStripMenuItem(tema.Nombre)
+                    {
+                        Tag = tema
+                    };
+                    temaItem.Click += TemaItem_Click;
+
+                    materiaItem.DropDownItems.Add(temaItem);
+                    contadorTemas++;
+                }
+
+                if (materia.Temas.Count > maximoTemas)
+                {
+                    // “Ver Todos” para esta materia
+                    var verTodosTemasItem = new ToolStripMenuItem("Ver Todos")
+                    {
+                        Tag = materia
+                    };
+                    verTodosTemasItem.Click += VerTodosTemas_Click;
+                    materiaItem.DropDownItems.Add(verTodosTemasItem);
+                }
+
+                menuEstudiar.Items.Add(materiaItem);
+                contadorMaterias++;
+            }
+
+            if (listaMaterias.Count > maximoMaterias)
+            {
+                var verTodasMateriasItem = new ToolStripMenuItem("Ver Todas las Materias")
+                {
+                    Tag = listaMaterias
+                };
+                verTodasMateriasItem.Click += VerTodasMaterias_Click;
+                menuEstudiar.Items.Add(verTodasMateriasItem);
+            }
+
+            _itemPersonalizar = new ToolStripMenuItem("Personalizar…");
+
+    
+            var personalizarMaterias = new ToolStripMenuItem("Materias…");
+            personalizarMaterias.Click += async (s, e) =>
+            {
+                FrmCrudMaterias frmMat = new FrmCrudMaterias();
+                frmMat.StartPosition = FormStartPosition.CenterParent;
+                frmMat.ShowDialog(this);
+
+                
+                await CargarMenuMateriasAsync();
+                _itemPersonalizar.ShowDropDown();
+            };
+            _itemPersonalizar.DropDownItems.Add(personalizarMaterias);
+
+           
+            var personalizarTemas = new ToolStripMenuItem("Temas…");
+            personalizarTemas.Click += async (s, e) =>
+            {
+                FrmCrudTemas frmTem = new FrmCrudTemas();
+                frmTem.StartPosition = FormStartPosition.CenterParent;
+                frmTem.ShowDialog(this);
+
+                await CargarMenuMateriasAsync();
+                _itemPersonalizar.ShowDropDown();
+            };
+            _itemPersonalizar.DropDownItems.Add(personalizarTemas);
+
+            
+            menuEstudiar.Items.Add(_itemPersonalizar);
         }
 
         private void FrmEstudiar_Resize(object sender, EventArgs e)
@@ -280,9 +309,7 @@ namespace AppFlashCard
             label1.Left = (this.ClientSize.Width - label1.Width) / 2;
             // Mantener el botón alineado a la derecha en tiempo real
             btnSalir.Left = this.ClientSize.Width - btnSalir.Width - 40;
-
         }
-
 
         private void GenerarCards()
         {
@@ -365,10 +392,10 @@ namespace AppFlashCard
                 else
                 {
                     MessageBox.Show("Este usuario aún no ha creado flashcards para este tema.");
+                    this.Show();
                 }
             }
         }
-
 
         private void MostrarCards()
         {
@@ -384,7 +411,6 @@ namespace AppFlashCard
                 currentIndex = Math.Max(0, cards.Count - cardsVisible);
 
             int x = 0;
-
             for (int i = currentIndex; i < currentIndex + cardsVisible && i < cards.Count; i++)
             {
                 var card = cards[i];
@@ -394,14 +420,10 @@ namespace AppFlashCard
             }
         }
 
-
-
-
         private void TemaItem_Click(object sender, EventArgs e)
         {
             if (sender is ToolStripMenuItem item && item.Tag is Tema tema)
             {
-
                 FrmTemasMaterias frmTemasMaterias = new FrmTemasMaterias(null, tema.Nombre);
                 this.Hide();
                 frmTemasMaterias.Show();
@@ -412,7 +434,7 @@ namespace AppFlashCard
         {
             if (sender is ToolStripMenuItem item && item.Tag is List<Materia> materias)
             {
-                FrmTemasMaterias frmTemasMaterias = new FrmTemasMaterias(null, null); 
+                FrmTemasMaterias frmTemasMaterias = new FrmTemasMaterias(null, null);
                 this.Hide();
                 frmTemasMaterias.Show();
             }
@@ -428,7 +450,6 @@ namespace AppFlashCard
             }
         }
 
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -443,8 +464,7 @@ namespace AppFlashCard
                 animationDirection = -1;
                 animTimer.Start();
                 timerAutoSlider.Stop();
-                timerAutoSlider.Start(); // reinicia el tiempo
-
+                timerAutoSlider.Start();
             }
         }
 
@@ -455,24 +475,21 @@ namespace AppFlashCard
                 animationDirection = 1;
                 animTimer.Start();
                 timerAutoSlider.Stop();
-                timerAutoSlider.Start(); // reinicia el tiempo
+                timerAutoSlider.Start();
             }
         }
 
         private void animTimer_Tick(object sender, EventArgs e)
         {
             animationOffset += animationStep;
-
             foreach (Control card in panelSlider.Controls)
             {
                 card.Left += animationStep * animationDirection;
             }
-
             if (animationOffset >= 180 + 10) // ancho del card + separación
             {
                 animTimer.Stop();
                 animationOffset = 0;
-
                 currentIndex = currentIndex - animationDirection;
                 MostrarCards();
             }
@@ -493,18 +510,17 @@ namespace AppFlashCard
                 esperandoReinicio = true;
                 timerDelayReinicio.Start();
             }
-
         }
 
         private void timerDelayReinicio_Tick(object sender, EventArgs e)
         {
             timerDelayReinicio.Stop();
             esperandoReinicio = false;
-
-            currentIndex = -1; 
+            currentIndex = -1;
             animationDirection = -1;
             animTimer.Start();
         }
+
         public class ColorTablePersonalizado : ProfessionalColorTable
         {
             public override Color MenuItemSelected => ColorTranslator.FromHtml("#424769");
@@ -520,7 +536,8 @@ namespace AppFlashCard
             public override Color MenuItemPressedGradientBegin => ColorTranslator.FromHtml("#424769");
             public override Color MenuItemPressedGradientEnd => ColorTranslator.FromHtml("#424769");
         }
-
-
     }
 }
+
+
+
