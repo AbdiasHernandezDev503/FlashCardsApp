@@ -378,7 +378,7 @@ namespace AppFlashCard
             if (txtBusqueda.Text == "Escribe el valor de la búsqueda")
             {
                 txtBusqueda.Text = "";
-                txtBusqueda.ForeColor = Color.White;
+                txtBusqueda.ForeColor = Color.Black;
             }
         }
 

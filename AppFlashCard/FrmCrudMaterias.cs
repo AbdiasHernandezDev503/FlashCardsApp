@@ -1,125 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
 namespace AppFlashCard
 {
     public partial class FrmCrudMaterias : Form
-    {// Fuentes Raleway
-        PrivateFontCollection fuentesPersonalizadas = new PrivateFontCollection();
-        Font ralewayRegular;
-        Font ralewaySemiBold;
+    {
+        private Panel panelContenedor;
 
-        // Cadena de conexión: AJÚSTALA a tu servidor y credenciales
+        // Cadena de conexión: Colocar servidor
         private string cadenaConexion =
-        "Server=DESKTOP-KIRL4P4;Database=FlashcardsDB;Trusted_Connection=True;TrustServerCertificate=True;";
-
+            "Server=DESKTOP-L2CUOSF\\MSSQLSERVER01;Database=FlashcardsDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
         // ID de la materia seleccionada (0 = insertar; >0 = editar)
         private int idMateriaSeleccionada = 0;
 
+        // Fuentes Raleway
+        PrivateFontCollection fuentesPersonalizadas = new PrivateFontCollection();
+        Font ralewayRegular;
+        Font ralewaySemiBold;
+
         public FrmCrudMaterias()
         {
             InitializeComponent();
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-        }
 
-        private void FrmCrudMaterias_Load(object sender, EventArgs e)
-        {
-            // 1) Cargar las fuentes Raleway desde recursos embebidos
+
+            // Evito que el Form sea más pequeño de 600x350
+            this.MinimumSize = new Size(600 + (this.Width - this.ClientSize.Width),
+                            350 + (this.Height - this.ClientSize.Height));
+
+            this.ClientSize = new Size(600, 350);
             CargarFuenteRaleway();
-
-            // 2) Asignar las fuentes a los controles
-            txtMateria.Font = ralewayRegular;
-            btnGuardar.Font = ralewaySemiBold;
-            btnSalir.Font = ralewaySemiBold;
-            lblAgregarMateria.Font = ralewaySemiBold;
-
-            // 3) Configurar estilo del formulario
-            this.BackColor = ColorTranslator.FromHtml("#2D3250");
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            // 4) Bordes redondeados y hover en botones
-            btnGuardar.Region = new Region(CrearRegionRedondeada(btnGuardar.ClientRectangle, 7));
-            btnSalir.Region = new Region(CrearRegionRedondeada(btnSalir.ClientRectangle, 7));
-            AgregarHover(btnGuardar, ColorTranslator.FromHtml("#B76F9D"));
-            AgregarHover(btnSalir, ColorTranslator.FromHtml("#B76F9D"));
-            btnSalir.ForeColor = Color.White;
-
-            // 5) Configurar DataGridView
-            dgvMaterias.ReadOnly = true;
-            dgvMaterias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMaterias.AllowUserToAddRows = false;
-            dgvMaterias.CellDoubleClick += dgvMaterias_CellDoubleClick;
-
-            // 6) Cargar la lista de materias al iniciar
-            CargarMaterias();
+            this.Load += FrmCrudMaterias_Load;
+            this.btnGuardar.Click += btnGuardar_Click_1;
+            this.btnSalir.Click += btnSalir_Click;
         }
 
-        #region == Métodos de UI y Estética ==
-        private void AgregarHover(Button boton, Color originalColor)
-        {
-            boton.BackColor = originalColor;
-            boton.FlatStyle = FlatStyle.Flat;
-            boton.FlatAppearance.BorderSize = 0;
-            boton.ForeColor = Color.White;
-
-            boton.MouseEnter += (s, e) => boton.BackColor = ControlPaint.Light(originalColor);
-            boton.MouseLeave += (s, e) => boton.BackColor = originalColor;
-        }
-
-        private GraphicsPath CrearRegionRedondeada(Rectangle rect, int radio)
-        {
-            int diameter = radio;
-            GraphicsPath path = new GraphicsPath();
-
-            path.StartFigure();
-            path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);
-            path.AddArc(rect.Right - diameter, rect.Y, diameter, diameter, 270, 90);
-            path.AddArc(rect.Right - diameter, rect.Bottom - diameter, diameter, diameter, 0, 90);
-            path.AddArc(rect.X, rect.Bottom - diameter, diameter, diameter, 90, 90);
-            path.CloseFigure();
-
-            return path;
-        }
-
+        // Carga las fuentes Raleway desde recursos embebidos
         private void CargarFuenteRaleway()
         {
             var assembly = Assembly.GetExecutingAssembly();
 
             void CargarTTF(string resourceName)
             {
-                Stream stream = assembly.GetManifestResourceStream(resourceName);
+                using Stream stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream == null)
                 {
                     MessageBox.Show($"No se encontró el recurso embebido:\n{resourceName}",
-                                    "Error al cargar fuente",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 byte[] fontData = new byte[stream.Length];
-                stream.Read(fontData, 0, (int)stream.Length);
-
+                stream.Read(fontData, 0, fontData.Length);
                 IntPtr data = Marshal.AllocCoTaskMem(fontData.Length);
                 Marshal.Copy(fontData, 0, data, fontData.Length);
                 fuentesPersonalizadas.AddMemoryFont(data, fontData.Length);
             }
-
 
             CargarTTF("AppFlashCard.Fonts.Raleway-Regular.ttf");
             CargarTTF("AppFlashCard.Fonts.Raleway-SemiBold.ttf");
@@ -129,11 +72,151 @@ namespace AppFlashCard
                 fuentesPersonalizadas.Families.Length > 1
                     ? fuentesPersonalizadas.Families[1]
                     : fuentesPersonalizadas.Families[0],
-                12f,
-                FontStyle.Bold
-            );
+                12f, FontStyle.Bold);
         }
-        #endregion
+
+        private GraphicsPath CrearRegionRedondeada(Rectangle bounds, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.StartFigure();
+            path.AddArc(bounds.X, bounds.Y, radio, radio, 180, 90);
+            path.AddArc(bounds.Right - radio, bounds.Y, radio, radio, 270, 90);
+            path.AddArc(bounds.Right - radio, bounds.Bottom - radio, radio, radio, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - radio, radio, radio, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
+
+        private void AplicarEstiloBoton(Button boton, string colorHex, string colorHoverHex)
+        {
+            Color colorNormal = ColorTranslator.FromHtml(colorHex);
+            Color colorHover = ColorTranslator.FromHtml(colorHoverHex);
+
+            boton.BackColor = colorNormal;
+            boton.ForeColor = Color.White;
+            boton.FlatStyle = FlatStyle.Flat;
+            boton.FlatAppearance.BorderSize = 0;
+            boton.Region = new Region(CrearRegionRedondeada(boton.ClientRectangle, 8));
+
+            boton.MouseEnter += (s, e) => boton.BackColor = colorHover;
+            boton.MouseLeave += (s, e) => boton.BackColor = colorNormal;
+        }
+
+        private void FrmCrudMaterias_Load(object sender, EventArgs e)
+        {
+            this.BackColor = ColorTranslator.FromHtml("#2D3250");
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // Aplicar fuente Raleway a todos los controles recursivamente
+            void AplicarFuente(Control ctrl)
+            {
+                if (ctrl is Label || ctrl is TextBox || ctrl is ComboBox || ctrl is Button)
+                    ctrl.Font = ralewayRegular;
+
+                foreach (Control child in ctrl.Controls)
+                    AplicarFuente(child);
+            }
+            AplicarFuente(this);
+
+            // Encabezado “Agregar Materia”
+            lblAgregarMateria.AutoSize = false;
+            lblAgregarMateria.Text = "Agregar Materia";
+            lblAgregarMateria.ForeColor = Color.White;
+            lblAgregarMateria.Font = ralewaySemiBold;
+            lblAgregarMateria.Size = new Size(250, 36);
+            lblAgregarMateria.Location = new Point(50, 20);   // Alineado a la izquierda en x=50
+            lblAgregarMateria.TextAlign = ContentAlignment.MiddleLeft;
+
+            // Label “Materia:” y TextBox
+            lblMateria.AutoSize = false;
+            lblMateria.Text = "Materia:";
+            lblMateria.ForeColor = Color.White;
+            lblMateria.Font = ralewaySemiBold;
+            lblMateria.Size = new Size(100, 24);
+            lblMateria.Location = new Point(50, 64);
+
+            txtMateria.BorderStyle = BorderStyle.None;
+            txtMateria.BackColor = ColorTranslator.FromHtml("#333A56");
+            txtMateria.ForeColor = Color.White;
+            txtMateria.Font = ralewayRegular;
+            txtMateria.Size = new Size(220, 28);
+            txtMateria.Location = new Point(150, 64);
+            txtMateria.SizeChanged += (s, ev) =>
+            {
+                txtMateria.Region = new Region(CrearRegionRedondeada(txtMateria.ClientRectangle, 6));
+            };
+
+            panelContenedor = new Panel
+            {
+                Location = new Point(300, 20),      // Coincide con el borde negro
+                Size = new Size(260, 360),      // Coincide con el borde negro
+                BorderStyle = BorderStyle.None  
+            };
+            this.Controls.Add(panelContenedor);
+
+            // Botón “Guardar”
+            btnGuardar.Text = "Guardar";
+            btnGuardar.Font = ralewaySemiBold;
+            btnGuardar.MinimumSize = new Size(100, 40);
+            btnGuardar.Padding = new Padding(8, 4, 8, 4);
+            btnGuardar.Location = new Point(50, 110);
+            AplicarEstiloBoton(btnGuardar, "#B76F9D", "#a45c8c");
+
+            // Botón “Salir”
+            btnSalir.Text = "Salir";
+            btnSalir.Font = ralewaySemiBold;
+            btnSalir.MinimumSize = new Size(100, 40);
+            btnSalir.Padding = new Padding(8, 4, 4, 4);
+            btnSalir.Location = new Point(180, 110);
+            AplicarEstiloBoton(btnSalir, "#F9B17A", "#e59e65");
+            panelContenedor = new Panel
+            {
+                Location = new Point(400, 20),
+                Size = new Size(380, 360),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            this.Controls.Add(panelContenedor);
+
+            // DataGridView en la parte derecha
+            dgvMaterias.Location = new Point(320, 20);
+            dgvMaterias.Size = new Size(260, 260);
+            dgvMaterias.Anchor = AnchorStyles.Top
+                                 | AnchorStyles.Bottom
+                                 | AnchorStyles.Left
+                                 | AnchorStyles.Right;
+
+      
+            dgvMaterias.BackgroundColor = ColorTranslator.FromHtml("#2D3250");
+            dgvMaterias.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#2D3250");
+            dgvMaterias.DefaultCellStyle.ForeColor = Color.White;
+            dgvMaterias.DefaultCellStyle.Font = ralewayRegular;
+            dgvMaterias.DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#B76F9D");
+            dgvMaterias.DefaultCellStyle.SelectionForeColor = Color.White;
+
+
+            dgvMaterias.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#B76F9D");
+            dgvMaterias.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMaterias.ColumnHeadersDefaultCellStyle.Font = ralewaySemiBold;
+            dgvMaterias.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvMaterias.EnableHeadersVisualStyles = false;
+
+            dgvMaterias.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#B76F9D");
+            dgvMaterias.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMaterias.ColumnHeadersDefaultCellStyle.Font = ralewaySemiBold;
+            dgvMaterias.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvMaterias.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            dgvMaterias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvMaterias.ReadOnly = true;
+            dgvMaterias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMaterias.AllowUserToAddRows = false;
+            dgvMaterias.CellDoubleClick += dgvMaterias_CellDoubleClick;
+
+            // Cargar datos en la grilla
+            CargarMaterias();
+        }
 
         #region == Cargar y Listar Materias ==
         private void CargarMaterias()
@@ -146,12 +229,8 @@ namespace AppFlashCard
                 da.Fill(dt);
                 dgvMaterias.DataSource = dt;
 
-                // Ajustar encabezados
                 dgvMaterias.Columns["Id"].HeaderText = "ID";
                 dgvMaterias.Columns["Nombre"].HeaderText = "Materia";
-
-
-
                 dgvMaterias.Columns["Id"].Visible = false;
             }
         }
@@ -166,13 +245,12 @@ namespace AppFlashCard
             idMateriaSeleccionada = Convert.ToInt32(fila.Cells["Id"].Value);
             txtMateria.Text = fila.Cells["Nombre"].Value.ToString();
 
-            // Cambiar texto del botón para indicar “Actualizar”
             btnGuardar.Text = "Actualizar";
         }
         #endregion
 
         #region == Insertar / Editar Materia ==
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             string nombre = txtMateria.Text.Trim();
             if (string.IsNullOrEmpty(nombre))
@@ -192,7 +270,7 @@ namespace AppFlashCard
                 cmd.Parameters.AddWithValue("@Nombre", nombre);
 
                 cn.Open();
-                object resultado = cmd.ExecuteScalar();  // devuelve el NuevoId o Id editado
+                object resultado = cmd.ExecuteScalar();
                 cn.Close();
 
                 int nuevoId = Convert.ToInt32(resultado);
@@ -208,12 +286,9 @@ namespace AppFlashCard
                                     MessageBoxIcon.Information);
             }
 
-            // Volver a modo “insertar”
             idMateriaSeleccionada = 0;
             txtMateria.Clear();
             btnGuardar.Text = "Guardar";
-
-            // Refrescar grilla
             CargarMaterias();
         }
         #endregion
@@ -223,19 +298,9 @@ namespace AppFlashCard
             Application.Exit();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnGuardar_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvMaterias_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
     }
 }

@@ -41,11 +41,11 @@
             // 
             // lbTemas
             // 
-            lbTemas.AutoSize = true;
+            lbTemas.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             lbTemas.ForeColor = SystemColors.ControlLightLight;
             lbTemas.Location = new Point(68, 53);
             lbTemas.Name = "lbTemas";
-            lbTemas.Size = new Size(85, 15);
+            lbTemas.Size = new Size(137, 25);
             lbTemas.TabIndex = 0;
             lbTemas.Text = "Agregar Temas";
             // 
@@ -65,7 +65,7 @@
             lblTema.ForeColor = SystemColors.ControlLightLight;
             lblTema.Location = new Point(17, 161);
             lblTema.Name = "lblTema";
-            lblTema.Size = new Size(38, 15);
+            lblTema.Size = new Size(39, 15);
             lblTema.TabIndex = 2;
             lblTema.Text = "Tema:";
             // 
@@ -110,7 +110,7 @@
             dgvTemas.Name = "dgvTemas";
             dgvTemas.ReadOnly = true;
             dgvTemas.RowTemplate.Height = 25;
-            dgvTemas.Size = new Size(407, 212);
+            dgvTemas.Size = new Size(328, 212);
             dgvTemas.TabIndex = 7;
             dgvTemas.CellContentClick += dgvTemas_CellContentClick_1;
             // 

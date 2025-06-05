@@ -47,7 +47,7 @@
             btnGuardar.Text = "Guardar";
             btnGuardar.TextAlign = ContentAlignment.TopCenter;
             btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnGuardar_Click_1;
+            
             // 
             // btnSalir
             // 
@@ -75,7 +75,7 @@
             lblMateria.Size = new Size(56, 17);
             lblMateria.TabIndex = 3;
             lblMateria.Text = "Materia:";
-            lblMateria.Click += label1_Click;
+            //lblMateria.Click += label1_Click;
             // 
             // lblAgregarMateria
             // 
